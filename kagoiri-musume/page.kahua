@@ -9,7 +9,7 @@
 (load "kagoiri-musume/version.kahua")
 
 (define-if-not-bound *kagoiri-musume-title*
-  "籠入娘。 - Groupie System")
+  "籠入チケット - 問題追跡システム")
 
 (define-constant *content-type*
   (format "text/html; charset=~a"
@@ -110,7 +110,7 @@
     (when cont
       (set! k cont))
     (kagoiri-page
-     (h1/ ($$ "籠入娘。へようこそ！"))
+     (h1/ ($$ "籠入チケットへようこそ！"))
      (h3/ message)
      (form/cont/
       (@@/ (cont (entry-lambda (:keyword name pass)
@@ -158,7 +158,7 @@
    (navigation-action/
 
     (pa$ equal? "new")
-    (link-of unit :action "new" :body ($$ "娘加入"))
+    (link-of unit :action "new" :body ($$ "チケットを切る"))
 
     string->number
     (link-of unit :body ($$ "一覧"))
@@ -181,7 +181,7 @@
     (a/cont/
      (@@/ (cont add-bookmark musume))
      (span/ (@/ (id "bookmark-button"))
-            ($$ "ブックマーク追加")))
+            ($$ "ブックマークに追加")))
 
     string->number
     (link-of (unit-of musume) :body ($$ "一覧"))
@@ -201,7 +201,7 @@
                                nodes))))
    (navigation-action/
     (pa$ equal? "new")
-    (link-of :action "new" :body ($$ "ユニット結成"))
+    (link-of :action "new" :body ($$ "プロジェクトを作る"))
 
     not
     (link-of :body ($$ "一覧"))

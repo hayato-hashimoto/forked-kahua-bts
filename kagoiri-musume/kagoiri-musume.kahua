@@ -108,7 +108,7 @@
 ;; DB Setting.
 ;;
 (define-if-not-bound *kagoiri-musume-title*
-  "籠入娘。 - Groupie System")
+  "籠入チケット - 問題追跡システム")
 
 (define-if-not-bound *kagoiri-musume-database-name*
   (let1 conf (kahua-config)
@@ -193,9 +193,9 @@
 ;;;
 (define-entry-method ** ()
   (permission-check-page
-   identity ($$ "ユニット一覧は一般ユーザアカウントが必要です")
+   identity ($$ "プロジェクト一覧の表示には、ログインする必要があります。")
    (navigation/)
-   (h2/ ($$ "ユニット一覧"))
+   (h2/ ($$ "プロジェクト一覧"))
    (unit-list-table/)))
 
 
@@ -204,7 +204,7 @@
 ;;;
 (define-entry-method ** ("new")
   (permission-check-page
-   identity ($$ "ユニット追加は一般ユーザアカウントが必要です")
+   identity ($$ "プロジェクトを追加するためには、ログインする必要があります。")
    (navigation/)
    (create-unit-form/)))
 
@@ -279,7 +279,7 @@
 	       u #f))
 	 (require-fan-message unit)
          (navigation/ unit)
-         (h2/ (format ($$ "~a - 娘。一覧") (unit-name-of unit)))
+         (h2/ (format ($$ "~a - チケット一覧") (unit-name-of unit)))
 	 (inter-unit-search-box/ unit-id)
 	 (form/cont/
           (@/ (id "filtering_form"))
@@ -347,7 +347,7 @@
 	     u #f))
        (require-fan-message unit)
        (navigation/ unit)
-       (h2/ (unit-name-of unit) ($$ " - 新しい娘。"))
+       (h2/ (unit-name-of unit) ($$ " - 新しいチケット"))
        (form/cont/
 	(@/ (enctype "multipart/form-data")
 	    (onsubmit "return false;")
@@ -377,7 +377,7 @@
 (define-entry (musume-view)
   (permission-check-page
    identity ($$ "ちょいまってや")
-   ($$ "娘。の閲覧")))
+   ($$ "チケットを見る")))
 
 ;;;==============================================================
 ;;; Subject remove
@@ -615,11 +615,11 @@
 	       (a/cont/ (@/ (class "clickable")
 			    (onclick "copy_search(this)"))
 			(@@/ (cont (cut move -1)))
-			"前の娘" )
+			"前のチケット" )
 	       (a/cont/ (@/ (class "clickable")
 			    (onclick "copy_search(this)"))
 			(@@/ (cont (cut move +1)))
-			"次の娘"))
+			"次のチケット"))
 	      (common:form/cont/
 	       (@/ (enctype "multipart/form-data")
                    (id "mainedit"))
@@ -661,7 +661,7 @@
 									      (disp-name-of item))))
 							       (items-of unit))))))
 			      $property-list$ $property-accessor-list$ $properties-accessor-list$)
-			(td/ (input/ (@/ (type "submit") (value ($$ "コミット")))))
+			(td/ (input/ (@/ (type "submit") (value ($$ "コミットする")))))
 			)))
 		 (td/ (@/ (rowspan 2) (id "limit-calendar"))
 		      (calendar/ date limit-date target-date get-target set-target!)))
@@ -671,9 +671,9 @@
                           (tr/
                            (td/)
                            (td/ (span/ (@/ (onclick (format "popup_linkselect(event, ~s)" (key-of unit))))
-                                       (clickable ($$ "娘へのリンク")))
+                                       (clickable ($$ "チケットへのリンク")))
                                 (span/ (@/ (onclick (format "mail_send_setting(event, ~s)" (key-of unit))))
-                                       (clickable ($$ "メール送信対象")))))
+                                       (clickable ($$ "メールを送る対象")))))
 			  (tr/
 			   (td/ ($$ "内容"))
 			   (td/ (@/ (id "melody-text"))
@@ -705,9 +705,9 @@
 					(span/ (@/ (class "song-fan")) #`"[,(disp-name-of f)]")
 					(composer? song
 						   (a/cont/ (@/ (onClick (format "return confirm('~a')?true:false"
-										 ($$ "本当に復活しますか？"))))
-							    (@@/ (cont delete-revival-song k)) ($$ "[復活]"))))
-				   (dd/ (p/ (@/ (class "warning rectangle")) ($$ "このメロディは削除されてます"))))
+										 ($$ "本当にこの投稿を復元させますか？"))))
+							    (@@/ (cont delete-revival-song k)) ($$ "[復元]"))))
+				   (dd/ (p/ (@/ (class "warning rectangle")) ($$ "この投稿は削除されてます"))))
 			      (dl/ (@/ (id #`",k"))
 				   (dt/ (span/ (@/ (class "song-no")) #`"♪,|n|.")
 					(span/ (@/ (class "song-time")) #`" ,(sys-strftime \"%Y/%m/%d %H:%M:%S\" (sys-localtime t))")
@@ -819,7 +819,7 @@
             (div/ (@/ (class "minititle")
                       (id "musumeref_title")
                       (onmousedown "this.onmousedown=Prototype.emptyFunction; new Draggable('memo',{handle:$('musumeref_title')})"))
-                  ($$ "ユニットを選択してください")
+                  ($$ "プロジェクトを選択してください")
                   (a/ (@/ (href "#")
                           (onclick "close_memo(); return false"))
                       ($$ "×")))
@@ -888,12 +888,12 @@
 			   (br/)))
 		      ((equal? keywd "mypage")
 		       (++ (list ($$ "マイページのヘルプです")
-				 ($$ "カレンダーで期限が設定されている娘。を確認できます")
-				 ($$ "TODOであなたにアサインされている娘。を確認できます")
+				 ($$ "カレンダーで期限が設定されているチケットを確認できます")
+				 ($$ "TODO であなたにアサインされているチケットを確認できます")
 				 ($$ "最近の更新で最近の登録内容が確認できます")
-				 ($$ "ブックマークであなたがブックマークに追加した娘。を確認できます"))
+				 ($$ "ブックマークであなたがブックマークに追加したチケットを確認できます"))
 			   (br/)))
-		      (else "ヘルプがありません。"))))
+		      (else "このページには、該当するヘルプはありません。"))))
     (html/
      (body/
       (div/ (@/ (id "help")

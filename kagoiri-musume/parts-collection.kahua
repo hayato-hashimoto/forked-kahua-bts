@@ -109,13 +109,13 @@
 	 "↓")))
 (define (change-passwrod-table/ old new again)
   (table/
-   (tr/ (th/ ($$ "旧パスワード"))
+   (tr/ (th/ ($$ "現在のパスワード"))
 	(td/ (input/ (@/ (type "password") (name old) (id "focus")
 			 (value "")) "")))
-   (tr/ (th/ ($$ "新パスワード"))
+   (tr/ (th/ ($$ "新しいパスワード"))
 	(td/ (input/ (@/ (type "password") (name new)
 			 (value "")) "")))
-   (tr/ (th/ ($$ "新パスワード(確認)"))
+   (tr/ (th/ ($$ "新しいパスワード (確認)"))
 	(td/ (input/ (@/ (type "password") (name again)
 			 (value "")) "")))))
 
@@ -140,14 +140,14 @@
          (groups-of group))))
 
 (define (require-fan-message unit)
-  (format ($$ "『~a』のファンとしてのアカウントが必要です") (unit-name-of unit)))
+  (format ($$ "『~a』のメンバーとして登録されている必要があります。") (unit-name-of unit)))
 
 (define (inter-unit-search-box/ unit-id)
   (div/
    (@/ (id "search-box"))
    (form/cont/
     (@@/ (cont search `(unit-id ,unit-id)))
-    ($$ "ユニット内検索:")
+    ($$ "プロジェクト内検索:")
     (input/ (@/ (onKeyUp "delay_search(this.value)")
 		(onKeyDown "search_onKeyDown(event)")
 		(type "text") (name "word") (size 10)
@@ -159,11 +159,10 @@
    (@/ (class "listing") (id "musume_list"))
    (thead/
     (span/ (@/ (id "musume_count")))
-    (cond ((= 0 (length musumes)) ($$ "萌えられる娘。がいません(T^T)"))
-	  ((= 1 (length musumes)) ($$ "ただひとりの娘。に萌えました"))
-	  ((> 100 (length musumes)) (format ($$ "~a人の娘。に萌えました") (length musumes)))
-	  ((> 500 (length musumes)) (format ($$  "~a人もの娘。に萌えました(萌えすぎです)") (length musumes)))
-	  (else (format ($$  "なんと~a人もの娘。に萌えまつきました orz") (length musumes))))
+    (cond
+      ((= 0 (length musumes)) ($$ "該当するチケットはありません。"))
+	    ((= 1 (length musumes)) ($$ "該当するチケットは 1 件 だけです。"))
+	    (else (format ($$  "該当するチケットは ~a 件 あります。 (length musumes)))))
     (div/ (@/ (id "status-num"))
 	  (map/ (lambda (s)
 		  (let1 statusid (code-of s)
@@ -257,10 +256,10 @@
 		   (has-item? unit props-of (th/ msg)))
 		 (drop-right $properties-accessor-list$ 1)
 		 (drop-right $property-headers$ 1))
-	   (th/ ($$ "アサイン")))
+	   (th/ ($$ "担当")))
 	  (tr/
 	   (map/ make-col $property-list$ $properties-accessor-list$)
-	   (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "新しい娘。加入"))))))))
+	   (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "新しいチケットを切る"))))))))
     (td/ (@/ (rowspan 2) (id "limit-calendar"))
 	 (calendar/ date limit-date target-date getter setter)))
    (tr/
@@ -271,9 +270,9 @@
                  (tr/
                   (td/)
                   (td/ (span/ (@/ (onclick (format "popup_linkselect(event, ~s)" (key-of unit))))
-                              (clickable ($$ "娘へのリンク")))
+                              (clickable ($$ "チケットへのリンク")))
                        (span/ (@/ (onclick (format "mail_send_setting(event, ~s)" (key-of unit))))
-                                       (clickable ($$ "メール送信対象")))))
+                                       (clickable ($$ "メールを送る対象")))))
 		 (tr/ (td/ ($$ "内容"))
 		      (td/ (textarea/ (@/ (type "text") (name "melody") (id "melody")
 					  (rows 20) (cols 80)))))
@@ -281,7 +280,7 @@
 		      (td/ (input/ (@/ (type "file") (name "file")))
 			   (input/ (@/ (type "hidden") (name "filename") (value ""))))))))
    (tr/
-    (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "新しい娘。加入"))))))))
+    (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "新しいチケットを切る"))))))))
 
 ;;-------------------------------------------------------------
 ;; high level  parts collection
@@ -290,10 +289,10 @@
   (let1 unsubscriptions (unsubscriptions-of (current-fan))
     (table/ (@/ (class "listing"))
             (thead/
-             (tr/ (th/ ($$ "ユニット名"))
-                  (th/ ($$  "概要"))
+             (tr/ (th/ ($$ "プロジェクト名"))
+                  (th/ ($$  "説明"))
                   (th/ (@/ (nowrap "nowrap"))
-                        ($$ "ファン"))
+                        ($$ "メンバー"))
                   (th/ ($$ "購読"))
                   (devel:th/)))
             (tbody/
@@ -333,8 +332,8 @@
                           (let1 subscription? (not (memq u unsubscriptions))
                             (a/cont/ (@/ (class "clickable")
 					 (title (if subscription?
-						    ($$ "娘。からのお便りを停止します")
-						    ($$ "娘。からのお便りをもらう"))))
+						    ($$ "チケットからのメールを停止します")
+						    ($$ "チケットに変更があったらメールで通知します"))))
 				     (@@/ (cont (cut (lambda ()
                                                        (update! (ref (current-fan) 'unsubscriptions)
                                                                 (lambda (ls)
@@ -357,8 +356,8 @@
   (let1 unit (get-optional unit #f)
     (div/
      (h2/ (if unit
-	      (format ($$ "『~a』ユニット設定") (unit-name-of unit))
-	      ($$ "新ユニット結成")))
+	      (format ($$ "プロジェクト ~a の設定") (unit-name-of unit))
+	      ($$ "プロジェクトを作る")))
 
      (if unit
          (admin:div/
@@ -378,7 +377,7 @@
                     (if (or (string-null? name)
 			     (null? (kahua-context-ref* "fans")))
 			 (begin
-			   (set-error-message ($$ "ユニット名入力とファン選択は必須です。"))
+			   (set-error-message ($$ "プロジェクト名入力と、メンバーの選択は必須です。"))
 			   (if unit
                                (redirect-to unit "edit")
                              (redirect/cont (cont **))))
@@ -429,17 +428,17 @@
                                 (option/ (@/ (value (code-of item)))
                                          (disp-name-of item))))
                             (all-statuss)))))
-       (tr/ (td/ ($$ "ユニット名") (span/ (@/ (class "warning")) ($$ "(※)")))
+       (tr/ (td/ ($$ "プロジェクト名") (span/ (@/ (class "warning")) ($$ "(※)")))
 	    (td/
 	     (input/ (@/ (type "text") (name "name") (size 80) (value (if unit (unit-name-of unit) ""))))
 	     (error:span/ (@/ (class "warning")) (set-error-message #f))))
-       (tr/ (td/ ($$  "概要"))
+       (tr/ (td/ ($$  "説明"))
 	    (td/ (@/ (colspan 2))
 		 (textarea/ (@/ (type "text") (name "desc")
 				(rows 10) (cols 80))
 			    (if unit (description-of unit) ""))))
        (tr/ (@/ (align "left"))
-	    (td/ ($$ "ファン") (span/ (@/ (class "warning")) ($$ "(※)")))
+	    (td/ ($$ "メンバー") (span/ (@/ (class "warning")) ($$ "(※)")))
 	    (td/
              (receive (fans members)
                  (if unit
@@ -491,15 +490,15 @@
                         (if unit (string-join
                                   (notify-addresses-of unit) "\n")
                           ""))))
-       (tr/ (td/ ($$ "公開"))
+       (tr/ (td/ ($$ "公開設定"))
             (td/
              (input/ (@/ (type "checkbox") (name "public") (id "public")
                          (checked (and unit (public-of unit)))))
              (label/ (@/ (for "public")) ($$ "公開"))))
        )
       (if unit
-	  (input/ (@/ (type "submit") (value ($$ "確定"))))
-        (input/ (@/ (type "submit") (value ($$ "新ユニット結成")))))))))
+	  (input/ (@/ (type "submit") (value ($$ "保存"))))
+        (input/ (@/ (type "submit") (value ($$ "プロジェクトを作る")))))))))
 
 ;;-------------------------------------------------------------
 ;; calendar
