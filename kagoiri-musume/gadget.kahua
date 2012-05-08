@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -21,7 +21,7 @@
   (list all-priorities all-statuss all-types all-categories all-fans))
 
 (define $property-headers$
-  (map $$ '("Í¥ÀèÅÙ" "¥¹¥Æ¡¼¥¿¥¹" "¥¿¥¤¥×" "¥«¥Æ¥´¥ê" "¥¢¥µ¥¤¥ó")))
+  (map $$ '("å„ªå…ˆåº¦" "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹" "ã‚¿ã‚¤ãƒ—" "ã‚«ãƒ†ã‚´ãƒª" "ã‚¢ã‚µã‚¤ãƒ³")))
 
 
 (define (melody->mail melody)
@@ -71,25 +71,25 @@
                             #`"<,(key-of unit),(key-of musume),(key-of (cadr songs))@,|domain|>")))
 	   (body  (string-join
 		   (list
-		    (string-append ($$ "¡Ú ¥¿¥¤¥È¥ë ¡Û")
+		    (string-append ($$ "ã€ ã‚¿ã‚¤ãƒˆãƒ« ã€‘")
 				   #`" ,subject")
-		    (string-append ($$ "¡Ú  ¥İ¥¹¥È  ¡Û")
+		    (string-append ($$ "ã€  ãƒã‚¹ãƒˆ  ã€‘")
 				   #`" ,(disp-name-of (fan-of song))")
-		    (string-append ($$ "¡Ú   Æü»ş   ¡Û")
+		    (string-append ($$ "ã€   æ—¥æ™‚   ã€‘")
 				   #`" ,(sys-strftime \"%Y/%m/%d %H:%M:%S\" (sys-localtime (ctime-of song)))")
-		    (string-append ($$ "¡Ú¥¹¥Æ¡¼¥¿¥¹¡Û")
+		    (string-append ($$ "ã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã€‘")
 				   #`" ,(disp-name-of (status-of musume))")
-		    (string-append ($$ "¡Ú  Í¥ÀèÅÙ  ¡Û")
+		    (string-append ($$ "ã€  å„ªå…ˆåº¦  ã€‘")
 				   #`" ,(disp-name-of (priority-of musume))")
-		    (string-append ($$ "¡Ú  ¥¿¥¤¥×  ¡Û")
+		    (string-append ($$ "ã€  ã‚¿ã‚¤ãƒ—  ã€‘")
 				   #`" ,(disp-name-of (type-of musume))")
-		    (string-append ($$ "¡Ú ¥«¥Æ¥´¥ê ¡Û")
+		    (string-append ($$ "ã€ ã‚«ãƒ†ã‚´ãƒª ã€‘")
 				   #`" ,(disp-name-of (category-of musume))")
-		    (string-append ($$ "¡Ú ¥¢¥µ¥¤¥ó ¡Û")
+		    (string-append ($$ "ã€ ã‚¢ã‚µã‚¤ãƒ³ ã€‘")
 				   #`" ,(disp-name-of (assign-of musume))")
-		    (string-append ($$ "¡Ú   ´ü¸Â   ¡Û")
+		    (string-append ($$ "ã€   æœŸé™   ã€‘")
 				   #`" ,(if (limit-of musume) (sys-strftime \"%Y/%m/%d\" (sys-localtime (limit-of musume))) \"\")")
-		    (string-append ($$ "¡Ú ¥³¥á¥ó¥È ¡Û")
+		    (string-append ($$ "ã€ ã‚³ãƒ¡ãƒ³ãƒˆ ã€‘")
 				   #`"\n\n,(melody->mail (melody-of song))")
 		    ""
                     (let1 files (files-of song)
@@ -114,7 +114,7 @@
 		    :to *kagoiri-system-info-email*
 		    :from #`"kagoiri-musume system <,|*kagoiri-musume-email*|>"
 		    :reply-to *kagoiri-musume-email*
-		    :subject "äÆÆşÌ¼¡£¥·¥¹¥Æ¥à¥¨¥é¡¼¾ğÊó"
+		    :subject "ç± å…¥å¨˜ã€‚ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼æƒ…å ±"
 		    :in-reply-to *kagoiri-musume-email*))
 
 
@@ -233,14 +233,14 @@
   (let-keywords* options ((loseless-voices :voiced #t)
                           (loseless-semivoices :semivoiced #t))
     (let* ((normal (make-table
-                    "±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜ¦İ§¨©ª«¬­®¯°¤¡¢£¥"
-                    "¥¢¥¤¥¦¥¨¥ª¥«¥­¥¯¥±¥³¥µ¥·¥¹¥»¥½¥¿¥Á¥Ä¥Æ¥È¥Ê¥Ë¥Ì¥Í¥Î¥Ï¥Ò¥Õ¥Ø¥Û¥Ş¥ß¥à¥á¥â¥ä¥æ¥è¥é¥ê¥ë¥ì¥í¥ï¥ò¥ó¥¡¥£¥¥¥§¥©¥ã¥å¥ç¥Ã¡¼¡¢¡£¡Ö¡×¡¦"))
+                    "ï½±ï½²ï½³ï½´ï½µï½¶ï½·ï½¸ï½¹ï½ºï½»ï½¼ï½½ï½¾ï½¿ï¾€ï¾ï¾‚ï¾ƒï¾„ï¾…ï¾†ï¾‡ï¾ˆï¾‰ï¾Šï¾‹ï¾Œï¾ï¾ï¾ï¾ï¾‘ï¾’ï¾“ï¾”ï¾•ï¾–ï¾—ï¾˜ï¾™ï¾šï¾›ï¾œï½¦ï¾ï½§ï½¨ï½©ï½ªï½«ï½¬ï½­ï½®ï½¯ï½°ï½¤ï½¡ï½¢ï½£ï½¥"
+                    "ã‚¢ã‚¤ã‚¦ã‚¨ã‚ªã‚«ã‚­ã‚¯ã‚±ã‚³ã‚µã‚·ã‚¹ã‚»ã‚½ã‚¿ãƒãƒ„ãƒ†ãƒˆãƒŠãƒ‹ãƒŒãƒãƒãƒãƒ’ãƒ•ãƒ˜ãƒ›ãƒãƒŸãƒ ãƒ¡ãƒ¢ãƒ¤ãƒ¦ãƒ¨ãƒ©ãƒªãƒ«ãƒ¬ãƒ­ãƒ¯ãƒ²ãƒ³ã‚¡ã‚£ã‚¥ã‚§ã‚©ãƒ£ãƒ¥ãƒ§ãƒƒãƒ¼ã€ã€‚ã€Œã€ãƒ»"))
            (voiced (make-table
-                    "³¶·¸¹º»¼½¾¿ÀÁÂÃÄÊËÌÍÎ"
-                    "¥ô¥¬¥®¥°¥²¥´¥¶¥¸¥º¥¼¥¾¥À¥Â¥Å¥Ç¥É¥Ğ¥Ó¥Ö¥Ù¥Ü"))
+                    "ï½³ï½¶ï½·ï½¸ï½¹ï½ºï½»ï½¼ï½½ï½¾ï½¿ï¾€ï¾ï¾‚ï¾ƒï¾„ï¾Šï¾‹ï¾Œï¾ï¾"
+                    "ãƒ´ã‚¬ã‚®ã‚°ã‚²ã‚´ã‚¶ã‚¸ã‚ºã‚¼ã‚¾ãƒ€ãƒ‚ãƒ…ãƒ‡ãƒ‰ãƒãƒ“ãƒ–ãƒ™ãƒœ"))
            (semivoiced (make-table
-                        "ÊËÌÍÎ"
-                        "¥Ñ¥Ô¥×¥Ú¥İ"))
+                        "ï¾Šï¾‹ï¾Œï¾ï¾"
+                        "ãƒ‘ãƒ”ãƒ—ãƒšãƒ"))
            (voiced-loseless? (if (string? loseless-voices) #f #t))
            (semivoiced-loseless? (if (string? loseless-semivoices) #f #t))
            (vs (if voiced-loseless?
@@ -256,17 +256,17 @@
               (list->string result)
               (let ((c (car rev-str))
                     (rest (cdr rev-str)))
-                (cond ((eq? c #\Ş) (cond ((null? rest) (if voiced-loseless?
-                                                           (lp rest (cons #\¡« result))
+                (cond ((eq? c #\ï¾) (cond ((null? rest) (if voiced-loseless?
+                                                           (lp rest (cons #\ã‚› result))
                                                            (lp rest result)))
                                          ((hash-table-get voiced (car rest) #f) => (lambda (v) (lp (cdr rest) (cons v result))))
-                                         ((hash-table-get vs (car rest) voiced-loseless?) (lp rest (cons #\¡« result)))
+                                         ((hash-table-get vs (car rest) voiced-loseless?) (lp rest (cons #\ã‚› result)))
                                          (else (lp rest result))))
-                      ((eq? c #\ß) (cond ((null? rest) (if semivoiced-loseless?
-                                                           (lp rest (cons #\¡¬ result))
+                      ((eq? c #\ï¾Ÿ) (cond ((null? rest) (if semivoiced-loseless?
+                                                           (lp rest (cons #\ã‚œ result))
                                                            (lp rest result)))
                                          ((hash-table-get semivoiced (car rest) #f) => (lambda (v) (lp (cdr rest) (cons v result))))
-                                         ((hash-table-get svs (car rest) semivoiced-loseless?) (lp rest (cons #\¡¬ result)))
+                                         ((hash-table-get svs (car rest) semivoiced-loseless?) (lp rest (cons #\ã‚œ result)))
                                          (else (lp rest result))))
                       ((hash-table-get normal c #f) => (lambda (v) (lp rest (cons v result))))
                       (else (lp rest (cons c result)))))))))))
@@ -274,9 +274,9 @@
 (define kana-trans:half->full (gen-kana-trans))
 
 ;
-; ¥­¡¼¥ï¡¼¥É¤Î¥ê¥¹¥È¤òÅĞÏ¿
-; help¥¨¥ó¥È¥ê¤È´Ø·¸¤¢¤ê¤Ş¤¹
-; ¸½ºßÅĞÏ¿¤µ¤ì¤Æ¤¤¤ë¥­¡¼¥ï¡¼¥É
+; ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®ãƒªã‚¹ãƒˆã‚’ç™»éŒ²
+; helpã‚¨ãƒ³ãƒˆãƒªã¨é–¢ä¿‚ã‚ã‚Šã¾ã™
+; ç¾åœ¨ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
 ; keyword: calendar
 ;
 (define (help-button/ keyword)

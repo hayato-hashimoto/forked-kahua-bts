@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -47,7 +47,7 @@
 
 (define-entry-method admin-system ("user" "csv")
   (kagoiri-page
-   (h1/ "CSV¥¤¥ó¥İ¡¼¥È")
+   (h1/ "CSVã‚¤ãƒ³ãƒãƒ¼ãƒˆ")
    (form/cont/
     (@/ (enctype "multipart/form-data"))
     (@@/ (cont parse-csv))
@@ -58,12 +58,12 @@
   (entry-lambda (:keyword file)
     (if (not (null? file))
         (edit-group (csv->list (car file)))
-      (h1/ "¥Õ¥¡¥¤¥ë¤ò»ØÄê¤·¤Æ¤¯¤À¤µ¤¤."))))
+      (h1/ "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŒ‡å®šã—ã¦ãã ã•ã„."))))
 
 
 (define (valid-groups groups)
-  ;; ·ÏÎó¤¬Æ±¤¸¥°¥ë¡¼¥×¤«¤éËöÃ¼¤Î
-  ;; ¥°¥ë¡¼¥×°Ê³°¤ò¼è¤ê½ü¤¯
+  ;; ç³»åˆ—ãŒåŒã˜ã‚°ãƒ«ãƒ¼ãƒ—ã‹ã‚‰æœ«ç«¯ã®
+  ;; ã‚°ãƒ«ãƒ¼ãƒ—ä»¥å¤–ã‚’å–ã‚Šé™¤ã
   (let loop ((valid groups)
              (rest groups))
     (if (null? rest)
@@ -73,7 +73,7 @@
             (cdr rest)))))
 
 (define-method parent-groups ((obj <group>))
-  ;; Ê£¿ô¤Î¿Æ¤Ë¤ÏÌ¤ÂĞ±ş
+  ;; è¤‡æ•°ã®è¦ªã«ã¯æœªå¯¾å¿œ
   (let1 parents (ref obj 'parents)
     (if (not (null? parents))
         (cons (car parents)
@@ -176,11 +176,11 @@
         (skip-title recordes))
 
        (kagoiri-page
-        (h1/ "¥¤¥ó¥İ¡¼¥È·ë²Ì")
-        (h2/ "°Ê²¼¤Î¥æ¡¼¥¶¤ÏÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ş¤»¤ó")
+        (h1/ "ã‚¤ãƒ³ãƒãƒ¼ãƒˆçµæœ")
+        (h2/ "ä»¥ä¸‹ã®ãƒ¦ãƒ¼ã‚¶ã¯ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã›ã‚“")
         (table/
          (tr/
-          (map/ th/ '("ID" "Ì¾Á°" "¥á¡¼¥ë¥¢¥É¥ì¥¹" "¥°¥ë¡¼¥×";;  "ÄÉ²Ã"
+          (map/ th/ '("ID" "åå‰" "ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹" "ã‚°ãƒ«ãƒ¼ãƒ—";;  "è¿½åŠ "
                       )))
          (map/
           (lambda (userinfo)
@@ -196,10 +196,10 @@
 ;;                               (value (ref userinfo 0)))))
              ))
           non-user))
-        (h2/ "°Ê²¼¤Î¥æ¡¼¥¶¤ò¹¹¿·¤·¤Ş¤·¤¿¡¥")
+        (h2/ "ä»¥ä¸‹ã®ãƒ¦ãƒ¼ã‚¶ã‚’æ›´æ–°ã—ã¾ã—ãŸï¼")
         (table/
          (tr/
-          (map/ th/ '("ID" "Ì¾Á°" "¥á¡¼¥ë¥¢¥É¥ì¥¹" "¥°¥ë¡¼¥×")))
+          (map/ th/ '("ID" "åå‰" "ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹" "ã‚°ãƒ«ãƒ¼ãƒ—")))
          (map/
           (lambda (user)
             (tr/
@@ -232,17 +232,17 @@
   (let1 groups (load-groups recordes)
 
     (kagoiri-page
-     (h1/ "¥°¥ë¡¼¥×¹½Â¤ÀßÄê")
+     (h1/ "ã‚°ãƒ«ãƒ¼ãƒ—æ§‹é€ è¨­å®š")
      (fieldset/
-      (legend/ "¥°¥ë¡¼¥×¹½Â¤")
+      (legend/ "ã‚°ãƒ«ãƒ¼ãƒ—æ§‹é€ ")
       (form/cont/
        (@/ (onsubmit "group_edit_submit()"))
        (@@/ (cont (cut create-groups&assign-member recordes)))
        (input/ (@/ (type "hidden") (name "grouptree") (id "grouptree") (value "")))
-       (input/ (@/ (type "submit") (value "ÊİÂ¸"))))
+       (input/ (@/ (type "submit") (value "ä¿å­˜"))))
       (div/ (@/ (id "root-box"))))
      (fieldset/
-      (legend/ "¥°¥ë¡¼¥×¹½Â¤¤ÎÅÀÀşÏÈ¤ØDrag&Drop¤·¤Æ²¼¤µ¤¤")
+      (legend/ "ã‚°ãƒ«ãƒ¼ãƒ—æ§‹é€ ã®ç‚¹ç·šæ ã¸Drag&Dropã—ã¦ä¸‹ã•ã„")
       (div/ (@/ (id "main-box"))
             (node-set
              (map-with-index 
@@ -303,12 +303,12 @@
         (table/
          (@/ (class "group-edit"))
          (tr/
-          (td/ "¥°¥ë¡¼¥×Ì¾")
+          (td/ "ã‚°ãƒ«ãƒ¼ãƒ—å")
           (td/
            (input/ (@/ (value  (name-of group))
                        (name "name")))))
          (tr/
-          (td/ "¥á¥ó¥Ğ¡¼")
+          (td/ "ãƒ¡ãƒ³ãƒãƒ¼")
           (td/
            (ul/ (@/ (id #`"userlist,|group-key|")
                     (class "userlist")
@@ -320,7 +320,7 @@
                  (members-of group))))
           (td/
            (a/ (@/ (onclick #`"show_member_select(',|group-key|')"))
-               (clickable "¡Ü"))
+               (clickable "ï¼‹"))
            ))))))
      (script/
       (@/ (type "text/javascript"))
@@ -329,7 +329,7 @@
                    :constraint #f
                    :containment #f
                    ))
-     (input/ (@/ (type "submit") (value "ÊİÂ¸"))))))
+     (input/ (@/ (type "submit") (value "ä¿å­˜"))))))
 
 (define-entry-method admin-system ("group")
   (let1 groups '()
@@ -353,24 +353,24 @@
   (let1 root (top-group)
     (if root
         (admin-system-main
-         (admin-system-navigation/ "¥°¥ë¡¼¥×")
-         (h2/ "¥°¥ë¡¼¥×¹½Â¤ÀßÄê")
+         (admin-system-navigation/ "ã‚°ãƒ«ãƒ¼ãƒ—")
+         (h2/ "ã‚°ãƒ«ãƒ¼ãƒ—æ§‹é€ è¨­å®š")
          (fieldset/
-          (legend/ "¥°¥ë¡¼¥×¹½Â¤")
+          (legend/ "ã‚°ãƒ«ãƒ¼ãƒ—æ§‹é€ ")
           (form/cont/
            (@/ (onsubmit "group_edit_submit()"))
            (@@/ (cont edit-groups))
            (input/ (@/ (type "hidden") (name "grouptree") (id "grouptree") (value "")))
-           (input/ (@/ (type "submit") (value "ÊİÂ¸"))))
+           (input/ (@/ (type "submit") (value "ä¿å­˜"))))
           (div/ (@/ (id "root-box"))
                 (map/ make-dragbox (groups-of root))))
          (fieldset/
-          (legend/ "¥°¥ë¡¼¥×ÄÉ²Ã")
-          "¥°¥ë¡¼¥×Ì¾¤òÆşÎÏ¤·¤Æ¡ÖÄÉ²Ã¡×¥Ü¥¿¥ó¤ò²¡¤·¤Æ²¼¤µ¤¤"
+          (legend/ "ã‚°ãƒ«ãƒ¼ãƒ—è¿½åŠ ")
+          "ã‚°ãƒ«ãƒ¼ãƒ—åã‚’å…¥åŠ›ã—ã¦ã€Œè¿½åŠ ã€ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦ä¸‹ã•ã„"
           (form/
            (@/ (onsubmit "add_group(this);return false"))
            (input/ (@/ (type "text") (name "newgroup"))) 
-           (input/ (@/ (type "submit") (value "ÄÉ²Ã"))))
+           (input/ (@/ (type "submit") (value "è¿½åŠ "))))
 
           (div/ (@/ (id "work-box"))))
 

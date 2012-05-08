@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -30,7 +30,7 @@
 
 ;; aliases
 ;;
-; xgettext -L Scheme -k\$\$ *.kahua --from-code=euc-jp -o msgs/ja/kagoiri-musume.po
+; xgettext -L Scheme -k\$\$ *.kahua --from-code=utf8 -o msgs/ja/kagoiri-musume.po
 ; msgfmt -o kagoiri-musume.mo kagoiri-musume.po 
 (textdomain "kagoiri-musume"
             "ja"
@@ -89,7 +89,7 @@
       (lambda (u)
         (if (kahua-user-has-role? u '(admin))
             u #f))
-      ($$ "¥·¥¹¥Æ¥à´ÉÍı¼Ô¤Î¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
+      ($$ "ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
       (node-set/ node ...)))))
 
 (load "kagoiri-musume/version.kahua")
@@ -108,7 +108,7 @@
 ;; DB Setting.
 ;;
 (define-if-not-bound *kagoiri-musume-title*
-  "äÆÆşÌ¼¡£ - Groupie System")
+  "ç± å…¥å¨˜ã€‚ - Groupie System")
 
 (define-if-not-bound *kagoiri-musume-database-name*
   (let1 conf (kahua-config)
@@ -163,10 +163,10 @@
      (head/
       (meta/ (@/ (http-equiv "refresh")
                  (contnet #`"3; URL=,url"))))
-     (body/ (h1/ "¤³¤Î¥Ú¡¼¥¸¤Ï°ÜÆ°¤·¤Ş¤·¤¿")
+     (body/ (h1/ "ã“ã®ãƒšãƒ¼ã‚¸ã¯ç§»å‹•ã—ã¾ã—ãŸ")
             (a/ (@/ (href url)) url)
-            (p/ "3ÉÃ¸å¤Ë¼«Æ°¤Ç¿·¤·¤¤¥Ú¡¼¥¸¤Ø°ÜÆ°¤·¤Ş¤¹¡£"
-               "¼«Æ°¤Ç°ÜÆ°¤·¤Ê¤¤¾ì¹ç¡¢¾å¤Î¥ê¥ó¥¯¤ò¥¯¥ê¥Ã¥¯¤·¤Æ¤¯¤À¤µ¤¤¡£")))))
+            (p/ "3ç§’å¾Œã«è‡ªå‹•ã§æ–°ã—ã„ãƒšãƒ¼ã‚¸ã¸ç§»å‹•ã—ã¾ã™ã€‚"
+               "è‡ªå‹•ã§ç§»å‹•ã—ãªã„å ´åˆã€ä¸Šã®ãƒªãƒ³ã‚¯ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ãã ã•ã„ã€‚")))))
 
 (define-entry (unit-list :rest rest)
   (page-moved "**"))
@@ -193,9 +193,9 @@
 ;;;
 (define-entry-method ** ()
   (permission-check-page
-   identity ($$ "¥æ¥Ë¥Ã¥È°ìÍ÷¤Ï°ìÈÌ¥æ¡¼¥¶¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
+   identity ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆä¸€è¦§ã¯ä¸€èˆ¬ãƒ¦ãƒ¼ã‚¶ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
    (navigation/)
-   (h2/ ($$ "¥æ¥Ë¥Ã¥È°ìÍ÷"))
+   (h2/ ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆä¸€è¦§"))
    (unit-list-table/)))
 
 
@@ -204,7 +204,7 @@
 ;;;
 (define-entry-method ** ("new")
   (permission-check-page
-   identity ($$ "¥æ¥Ë¥Ã¥ÈÄÉ²Ã¤Ï°ìÈÌ¥æ¡¼¥¶¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
+   identity ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆè¿½åŠ ã¯ä¸€èˆ¬ãƒ¦ãƒ¼ã‚¶ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
    (navigation/)
    (create-unit-form/)))
 
@@ -279,7 +279,7 @@
 	       u #f))
 	 (require-fan-message unit)
          (navigation/ unit)
-         (h2/ (format ($$ "~a - Ì¼¡£°ìÍ÷") (unit-name-of unit)))
+         (h2/ (format ($$ "~a - å¨˜ã€‚ä¸€è¦§") (unit-name-of unit)))
 	 (inter-unit-search-box/ unit-id)
 	 (form/cont/
           (@/ (id "filtering_form"))
@@ -296,7 +296,7 @@
                                 (@/ (id "non-display-status-link")
                                     (class "label"))
                                 (string-join (map disp-name-of (non-display-statuss-of unit)) ", ")
-                                "¥¹¥Æ¡¼¥¿¥¹¤òÉ½¼¨")))
+                                "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¡¨ç¤º")))
 
 	  (table/
 	   (@/ (class "table-filter"))
@@ -306,14 +306,14 @@
 		      $properties-accessor-list$
 		      $property-headers$)
                 )
-	   (let1 filter-row "filter_table(this, 'musume_list', 'Á´¤Æ')"
+	   (let1 filter-row "filter_table(this, 'musume_list', 'å…¨ã¦')"
 	     (define (prop-dropdown/ props-of prop propname)
 	       (has-item? unit props-of
 			  (td/ (select/
 				(@/ (onchange filter-row)
 				    (name propname))
 				(node-set
-				 (cons (option/ (@/ (value "*all*")) ($$ "Á´¤Æ"))
+				 (cons (option/ (@/ (value "*all*")) ($$ "å…¨ã¦"))
 				       (options (props-of unit) prop)))))))
 	     (tr/ (@/ (valign "top"))
 		  (prop-dropdown/ priorities-of priority "priority")
@@ -323,7 +323,7 @@
 		  (prop-dropdown/ fans-of assign "assign")
 		  (td/
                    (noscript/
-                    (input/ (@/ (type "submit") (name "submit") (value ($$ "¹Ê¤ê¹ş¤ß"))))))
+                    (input/ (@/ (type "submit") (name "submit") (value ($$ "çµã‚Šè¾¼ã¿"))))))
 		  ))))
          ;; data table
          (let1 musumes (sort (filter (every-pred count-status non-display-status-filter and-filter)
@@ -347,7 +347,7 @@
 	     u #f))
        (require-fan-message unit)
        (navigation/ unit)
-       (h2/ (unit-name-of unit) ($$ " - ¿·¤·¤¤Ì¼¡£"))
+       (h2/ (unit-name-of unit) ($$ " - æ–°ã—ã„å¨˜ã€‚"))
        (form/cont/
 	(@/ (enctype "multipart/form-data")
 	    (onsubmit "return false;")
@@ -355,7 +355,7 @@
 	(@@/ (cont (entry-lambda (:keyword name priority status assign type category melody file)
 		       (if (string-null? name)
 			   (begin
-			     (set-error-message ($$ "¥¿¥¤¥È¥ë¤òÆşÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£"))
+			     (set-error-message ($$ "ã‚¿ã‚¤ãƒˆãƒ«ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚"))
                              (redirect-to unit "new"))
 			   (begin
 			     (when (string-null? melody) (set! melody name))
@@ -376,8 +376,8 @@
 
 (define-entry (musume-view)
   (permission-check-page
-   identity ($$ "¤Á¤ç¤¤¤Ş¤Ã¤Æ¤ä")
-   ($$ "Ì¼¡£¤Î±ÜÍ÷")))
+   identity ($$ "ã¡ã‚‡ã„ã¾ã£ã¦ã‚„")
+   ($$ "å¨˜ã€‚ã®é–²è¦§")))
 
 ;;;==============================================================
 ;;; Subject remove
@@ -412,26 +412,26 @@
      identity
      (require-fan-message unit)
      (navigation/ musume)
-     (h3/ (format ($$ "¡Ø~a¡Ù¤Î¡Ø~a ¡Ù¤òÊÔ½¸¤¹¤ë¡£") (unit-name-of unit) (mname-of musume)))
+     (h3/ (format ($$ "ã€~aã€ã®ã€~a ã€ã‚’ç·¨é›†ã™ã‚‹ã€‚") (unit-name-of unit) (mname-of musume)))
 
      (form/cont/
       (@@/ (cont (entry-lambda (:keyword name)
                    (if (not (string-null? name))
                        (set! (mname-of musume) name))
                    (redirect-to musume "edit"))))
-      (table/ (tr/ (td/ ($$ "¥¿¥¤¥È¥ë"))
+      (table/ (tr/ (td/ ($$ "ã‚¿ã‚¤ãƒˆãƒ«"))
 		   (td/ (input/ (@/ (type "text") (name "name")
 				    (id "focus") (size 80)
 				    (value (mname-of musume)))))))
-      (input/ (@/ (type "submit") (value ($$ "²şÌ¾")))))
+      (input/ (@/ (type "submit") (value ($$ "æ”¹å")))))
 
      (devel:div/
       (a/cont/
        (@/ (class "clickable delete")
            (onClick (format "return confirm('~a')?true:false"
-                            ($$ "ËÜÅö¤Ëºï½ü¤·¤Ş¤¹¤«¡©"))))
+                            ($$ "æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ"))))
        (@@/ (cont remove-musume (key-of musume)))
-       ($$ "ºï½ü"))))))
+       ($$ "å‰Šé™¤"))))))
 
 
 ;;;==============================================================
@@ -602,24 +602,24 @@
               (navigation/ musume)
               (h2/ (@/ (class (and (or (time-limit? musume)
 				       (time-over? musume)) "timeover")))
-		   (format "~a - ~a¡§~a - ~a~a"
+		   (format "~a - ~aï¼š~a - ~a~a"
 			   (unit-name-of unit)
 			   (mno-of musume)
 			   (mname-of musume)
 			   (disp-name-of
 			    (status-of musume))
-			   (cond ((time-limit? musume) ($$ "(´üÆü)"))
-				 ((time-over? musume) ($$ "(´ü¸ÂÀÚ)"))
+			   (cond ((time-limit? musume) ($$ "(æœŸæ—¥)"))
+				 ((time-over? musume) ($$ "(æœŸé™åˆ‡)"))
 				 (else ""))))
 	      (div/
 	       (a/cont/ (@/ (class "clickable")
 			    (onclick "copy_search(this)"))
 			(@@/ (cont (cut move -1)))
-			"Á°¤ÎÌ¼" )
+			"å‰ã®å¨˜" )
 	       (a/cont/ (@/ (class "clickable")
 			    (onclick "copy_search(this)"))
 			(@@/ (cont (cut move +1)))
-			"¼¡¤ÎÌ¼"))
+			"æ¬¡ã®å¨˜"))
 	      (common:form/cont/
 	       (@/ (enctype "multipart/form-data")
                    (id "mainedit"))
@@ -661,7 +661,7 @@
 									      (disp-name-of item))))
 							       (items-of unit))))))
 			      $property-list$ $property-accessor-list$ $properties-accessor-list$)
-			(td/ (input/ (@/ (type "submit") (value ($$ "¥³¥ß¥Ã¥È")))))
+			(td/ (input/ (@/ (type "submit") (value ($$ "ã‚³ãƒŸãƒƒãƒˆ")))))
 			)))
 		 (td/ (@/ (rowspan 2) (id "limit-calendar"))
 		      (calendar/ date limit-date target-date get-target set-target!)))
@@ -671,24 +671,24 @@
                           (tr/
                            (td/)
                            (td/ (span/ (@/ (onclick (format "popup_linkselect(event, ~s)" (key-of unit))))
-                                       (clickable ($$ "Ì¼¤Ø¤Î¥ê¥ó¥¯")))
+                                       (clickable ($$ "å¨˜ã¸ã®ãƒªãƒ³ã‚¯")))
                                 (span/ (@/ (onclick (format "mail_send_setting(event, ~s)" (key-of unit))))
-                                       (clickable ($$ "¥á¡¼¥ëÁ÷¿®ÂĞ¾İ")))))
+                                       (clickable ($$ "ãƒ¡ãƒ¼ãƒ«é€ä¿¡å¯¾è±¡")))))
 			  (tr/
-			   (td/ ($$ "ÆâÍÆ"))
+			   (td/ ($$ "å†…å®¹"))
 			   (td/ (@/ (id "melody-text"))
 				(textarea/ (@/ (type "text") (name "melody")
 					       (rows 10) (cols 80) (id "focus")))))
 			  (tr/
-			   (td/ ($$ "¥Õ¥¡¥¤¥ë"))
+			   (td/ ($$ "ãƒ•ã‚¡ã‚¤ãƒ«"))
 			   (td/ (input/ (@/ (type "file") (name "file")))))
 			  )))))
 
               (table/
                (@/ (id "links-table"))
                (tr/
-                (th/ ($$ "¥ê¥ó¥¯Àè"))
-                (th/ ($$ "¥ê¥ó¥¯¸µ")))
+                (th/ ($$ "ãƒªãƒ³ã‚¯å…ˆ"))
+                (th/ ($$ "ãƒªãƒ³ã‚¯å…ƒ")))
                (tr/
                 (td/
                  (ul/ (map/ (compose li/ link-of) (ref musume 'links))))
@@ -700,27 +700,27 @@
 			(let1 song (id->obj <song> k)
 			  (if (delete-of song)
 			      (dl/ (@/ (id #`",k"))
-				   (dt/ (span/ (@/ (class "song-no")) #`"¢ö,|n|.")
+				   (dt/ (span/ (@/ (class "song-no")) #`"â™ª,|n|.")
 					(span/ (@/ (class "song-time")) #`" ,(sys-strftime \"%Y/%m/%d %H:%M:%S\" (sys-localtime t))")
 					(span/ (@/ (class "song-fan")) #`"[,(disp-name-of f)]")
 					(composer? song
 						   (a/cont/ (@/ (onClick (format "return confirm('~a')?true:false"
-										 ($$ "ËÜÅö¤ËÉü³è¤·¤Ş¤¹¤«¡©"))))
-							    (@@/ (cont delete-revival-song k)) ($$ "[Éü³è]"))))
-				   (dd/ (p/ (@/ (class "warning rectangle")) ($$ "¤³¤Î¥á¥í¥Ç¥£¤Ïºï½ü¤µ¤ì¤Æ¤Ş¤¹"))))
+										 ($$ "æœ¬å½“ã«å¾©æ´»ã—ã¾ã™ã‹ï¼Ÿ"))))
+							    (@@/ (cont delete-revival-song k)) ($$ "[å¾©æ´»]"))))
+				   (dd/ (p/ (@/ (class "warning rectangle")) ($$ "ã“ã®ãƒ¡ãƒ­ãƒ‡ã‚£ã¯å‰Šé™¤ã•ã‚Œã¦ã¾ã™"))))
 			      (dl/ (@/ (id #`",k"))
-				   (dt/ (span/ (@/ (class "song-no")) #`"¢ö,|n|.")
+				   (dt/ (span/ (@/ (class "song-no")) #`"â™ª,|n|.")
 					(span/ (@/ (class "song-time")) #`" ,(sys-strftime \"%Y/%m/%d %H:%M:%S\" (sys-localtime t))")
 					(span/ (@/ (class "song-fan")) #`"[,(disp-name-of f)]")
 					(a/cont/ (@/ (onclick "insert_excerption(this); return false"))
 						 (@@/ (id "melody-text")
 						      (cont (lambda _
 							      (excerpt song))))
-						 ($$ "[ÎØ¾§]"))
+						 ($$ "[è¼ªå”±]"))
 					(composer? song
 						   (a/cont/ (@/ (onClick (format "return confirm('~a')?true:false"
-										 ($$ "ËÜÅö¤Ëºï½ü¤·¤Ş¤¹¤«¡©"))))
-							    (@@/ (cont delete-revival-song k)) ($$ "[ºï½ü]"))))
+										 ($$ "æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ"))))
+							    (@@/ (cont delete-revival-song k)) ($$ "[å‰Šé™¤]"))))
                                    (dd/ (p/ (@/ (class "rectangle")) (melody-format m)
                                             (unless/ (null? u)
                                               (let1 upfile (car u)
@@ -745,8 +745,8 @@
    (lambda (u)
      (if (kahua-user-has-role? u '(developer))
 	 u #f))
-   ($$ "¥·¥¹¥Æ¥à´ÉÍı¼Ô¤Î¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
-   (h2/ "¥á¡¼¥ëÁ÷¿®")
+   ($$ "ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
+   (h2/ "ãƒ¡ãƒ¼ãƒ«é€ä¿¡")
    (form/cont/
     (@@/ (cont (entry-lambda (:keyword sendtos subject content)
 		   (or (string-null? sendtos)
@@ -772,16 +772,16 @@
 				    (loop (cdr tos))))))))
 		 (redirect/cont (cont sendmail)))))
     (table/
-     (tr/ (th/ "°¸Àè:")
+     (tr/ (th/ "å®›å…ˆ:")
 	  (td/ (textarea/ (@/ (type "text") (name "sendtos")
 			      (rows 5) (cols 80) (id "focus")))))
-     (tr/ (th/ "ÂêÌ¾:")
+     (tr/ (th/ "é¡Œå:")
 	  (td/ (input/ (@/ (type "text") (name "subject")
 			   (size 80) (id "focus")))))
-     (tr/ (th/ "ÆâÍÆ:")
+     (tr/ (th/ "å†…å®¹:")
 	  (td/ (textarea/ (@/ (type "text") (name "content")
 			      (rows 30) (cols 80) (id "focus"))))))
-    (input/ (@/ (type "submit") (name "send") (value "Á÷¿®"))))))
+    (input/ (@/ (type "submit") (name "send") (value "é€ä¿¡"))))))
 
 ;;;==============================================================
 ;;; MyPage
@@ -811,7 +811,7 @@
                                  (link-of m
                                    :body (node-set
                                           (list (@/ (target (format "[[~a/~a]]" (key-of unit) (mno-of m))))
-                                                (format "¢ö~a ~a" (mno-of m) (mname-of m)))))))
+                                                (format "â™ª~a ~a" (mno-of m) (mname-of m)))))))
                               (all-active-musumes unit)))))
     (html/
      (body/
@@ -819,10 +819,10 @@
             (div/ (@/ (class "minititle")
                       (id "musumeref_title")
                       (onmousedown "this.onmousedown=Prototype.emptyFunction; new Draggable('memo',{handle:$('musumeref_title')})"))
-                  ($$ "¥æ¥Ë¥Ã¥È¤òÁªÂò¤·¤Æ¤¯¤À¤µ¤¤")
+                  ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆã‚’é¸æŠã—ã¦ãã ã•ã„")
                   (a/ (@/ (href "#")
                           (onclick "close_memo(); return false"))
-                      ($$ "¡ß")))
+                      ($$ "Ã—")))
             (ul/ (@/ (onclick #`"return check_click(event,,',(session-cont-register musume-list)')"))
                  (map/ (lambda (unit)
                          (li/ (@/ (target (key-of unit)))
@@ -837,7 +837,7 @@
          (fans (fans-of unit)))
     (fieldset/
      (@/ (style "position:relative; margin:5px;"))
-     (legend/ ($$ "Á÷¿®¥á¥ó¥Ğ¡¼ÁªÂò"))
+     (legend/ ($$ "é€ä¿¡ãƒ¡ãƒ³ãƒãƒ¼é¸æŠ"))
      (input/ (@/ (type "hidden") (name "custom_mail_send") (value "yes")))
      (select/ (@/ (size (x->string (length fans)))
                   (multiple "multiple")
@@ -850,11 +850,11 @@
                     (fans-of unit)))
      (div/ (@/ (style "display:inline;position:absolute"))
            (span/ (@/ (onclick (format "option_select('mail_send_setting_select', ['~a', $('mainedit').assign.value])" (fan-name-of (current-fan)))))
-                  (clickable ($$ "Ã´Åö¼Ô¤È¼«Ê¬¤Î¤ß")))
+                  (clickable ($$ "æ‹…å½“è€…ã¨è‡ªåˆ†ã®ã¿")))
            (span/ (@/ (onclick "option_select('mail_send_setting_select', true)"))
-                  (clickable ($$ "Á´ÁªÂò")))
+                  (clickable ($$ "å…¨é¸æŠ")))
            (span/ (@/ (onclick "option_select('mail_send_setting_select', false)"))
-                  (clickable ($$ "ÌµÁªÂò"))))
+                  (clickable ($$ "ç„¡é¸æŠ"))))
      )))
 
 
@@ -873,27 +873,27 @@
 ;;; Help
 ;;;
 (define-entry (help keywd)
-  ;; ¤³¤³¤Ë¥Ø¥ë¥×¤Î¥«¥¿¥í¥°¤òºîÀ®¤¹¤ë
+  ;; ã“ã“ã«ãƒ˜ãƒ«ãƒ—ã®ã‚«ã‚¿ãƒ­ã‚°ã‚’ä½œæˆã™ã‚‹
   (letrec ((++ (lambda (lst sep)
 		 (if (null? lst)
 		     '()
 		     (cons (car lst)
 			   (cons sep (++ (cdr lst) sep))))))
 	   (msg (cond ((equal? keywd "calendar")
-		       (++ (list ($$ "´ü¸ÂÀßÄê¥«¥ì¥ó¥À¡¼¤Î¥Ø¥ë¥×¤Ç¤¹")
-				 ($$ "ÁªÂò¤·¤ÆÅê¹Æ¤¹¤ë¤È´ü¸Â¤¬ÅĞÏ¿¤µ¤ì¤Ş¤¹")
-				 ($$ "¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï´ü¸ÂÌµ¤·¤Ç¤¹¤¬¡¢ÀßÄê¤·¤¿¤â¤Î¤Ï´ü¸Âºï½ü¤Çºï½ü¤·¤Æ¤«¤éÅê¹Æ¤·¤Æ¤¯¤À¤µ¤¤")
-				 ($$ "²¾ÁªÂòÃæ¤ÎÆüÉÕ¤Ç¤Ï¤Ê¤¯¡¢¸µ¤Î´ü¸ÂÀßÄê¤ËÌá¤·¤¿¤¤¾ì¹ç¤Ë¤ÏÊÑ¹¹Ãæ»ß¤ò²¡¤·¤Æ¤¯¤À¤µ¤¤")
-				 ($$ "¸µ¤ÎÀßÄê¤ËÁªÂò¾õÂÖ¤¬Ìá¤µ¤ì¤Ş¤¹"))
+		       (++ (list ($$ "æœŸé™è¨­å®šã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã®ãƒ˜ãƒ«ãƒ—ã§ã™")
+				 ($$ "é¸æŠã—ã¦æŠ•ç¨¿ã™ã‚‹ã¨æœŸé™ãŒç™»éŒ²ã•ã‚Œã¾ã™")
+				 ($$ "ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯æœŸé™ç„¡ã—ã§ã™ãŒã€è¨­å®šã—ãŸã‚‚ã®ã¯æœŸé™å‰Šé™¤ã§å‰Šé™¤ã—ã¦ã‹ã‚‰æŠ•ç¨¿ã—ã¦ãã ã•ã„")
+				 ($$ "ä»®é¸æŠä¸­ã®æ—¥ä»˜ã§ã¯ãªãã€å…ƒã®æœŸé™è¨­å®šã«æˆ»ã—ãŸã„å ´åˆã«ã¯å¤‰æ›´ä¸­æ­¢ã‚’æŠ¼ã—ã¦ãã ã•ã„")
+				 ($$ "å…ƒã®è¨­å®šã«é¸æŠçŠ¶æ…‹ãŒæˆ»ã•ã‚Œã¾ã™"))
 			   (br/)))
 		      ((equal? keywd "mypage")
-		       (++ (list ($$ "¥Ş¥¤¥Ú¡¼¥¸¤Î¥Ø¥ë¥×¤Ç¤¹")
-				 ($$ "¥«¥ì¥ó¥À¡¼¤Ç´ü¸Â¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤ëÌ¼¡£¤ò³ÎÇ§¤Ç¤­¤Ş¤¹")
-				 ($$ "TODO¤Ç¤¢¤Ê¤¿¤Ë¥¢¥µ¥¤¥ó¤µ¤ì¤Æ¤¤¤ëÌ¼¡£¤ò³ÎÇ§¤Ç¤­¤Ş¤¹")
-				 ($$ "ºÇ¶á¤Î¹¹¿·¤ÇºÇ¶á¤ÎÅĞÏ¿ÆâÍÆ¤¬³ÎÇ§¤Ç¤­¤Ş¤¹")
-				 ($$ "¥Ö¥Ã¥¯¥Ş¡¼¥¯¤Ç¤¢¤Ê¤¿¤¬¥Ö¥Ã¥¯¥Ş¡¼¥¯¤ËÄÉ²Ã¤·¤¿Ì¼¡£¤ò³ÎÇ§¤Ç¤­¤Ş¤¹"))
+		       (++ (list ($$ "ãƒã‚¤ãƒšãƒ¼ã‚¸ã®ãƒ˜ãƒ«ãƒ—ã§ã™")
+				 ($$ "ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã§æœŸé™ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹å¨˜ã€‚ã‚’ç¢ºèªã§ãã¾ã™")
+				 ($$ "TODOã§ã‚ãªãŸã«ã‚¢ã‚µã‚¤ãƒ³ã•ã‚Œã¦ã„ã‚‹å¨˜ã€‚ã‚’ç¢ºèªã§ãã¾ã™")
+				 ($$ "æœ€è¿‘ã®æ›´æ–°ã§æœ€è¿‘ã®ç™»éŒ²å†…å®¹ãŒç¢ºèªã§ãã¾ã™")
+				 ($$ "ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯ã§ã‚ãªãŸãŒãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯ã«è¿½åŠ ã—ãŸå¨˜ã€‚ã‚’ç¢ºèªã§ãã¾ã™"))
 			   (br/)))
-		      (else "¥Ø¥ë¥×¤¬¤¢¤ê¤Ş¤»¤ó¡£"))))
+		      (else "ãƒ˜ãƒ«ãƒ—ãŒã‚ã‚Šã¾ã›ã‚“ã€‚"))))
     (html/
      (body/
       (div/ (@/ (id "help")
@@ -901,10 +901,10 @@
 	    (div/ (@/ (class "minititle")
                       (id "helptitle")
                       (onmousedown "this.onmousedown=Prototype.emptyFunction; new Draggable('help',{handle:$('helptitle')})"))
-		  ($$ "¥Ø¥ë¥×")
+		  ($$ "ãƒ˜ãƒ«ãƒ—")
 		  (a/ (@/ (href "#")
 			  (onclick "close_help(); return false"))
-		      ($$ "¡ß")))
+		      ($$ "Ã—")))
 	    (p/ (@/ (class "rectangle"))
 		(node-set msg)))))))
 
@@ -940,7 +940,7 @@
 		(fan (guard (e (#t #f))
 			    (fan-name-of (current-fan))))
 		(msg (string-join
-		      (list #`"°Ê²¼¤Î¥¨¥é¡¼¤¬È¯À¸¤·¤Ş¤·¤¿¡£"
+		      (list #`"ä»¥ä¸‹ã®ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"
 			    ""
 			    #`"KEY: ,key"
 			    #`"DATE: ,date"
@@ -954,7 +954,7 @@
     (kagoiri-page
      (div/ (@/ (class "error"))
 	   (h3/ (@/ (class "warning"))
-		"¥¨¥é¡¼¤¬È¯À¸¤·¤Ş¤·¤¿")
+		"ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ")
 	   (p/ (@/ (class "rectangle"))
 	       (melody-format msg))))))
 

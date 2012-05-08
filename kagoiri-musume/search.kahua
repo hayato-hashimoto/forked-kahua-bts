@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2004 Scheme Arts, L.L.C., All rights reserved.
 ;;  Copyright (c) 2004 Time Intermedia Corporation, All rights reserved.
@@ -8,11 +8,11 @@
 
 ;; methods for search.
 (define-method searchable-text ((obj <unit>))
-  (list (cons ($$ "¥æ¥Ë¥Ã¥ÈÌ¾") (ref obj 'unit-name))
-        (cons ($$  "³µÍ×") (ref obj 'description))))
+  (list (cons ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆå") (ref obj 'unit-name))
+        (cons ($$  "æ¦‚è¦") (ref obj 'description))))
 
 (define-method searchable-text ((obj <musume>))
-  (cons (cons ($$ "¥¿¥¤¥È¥ë") (ref obj 'musume-name))
+  (cons (cons ($$ "ã‚¿ã‚¤ãƒˆãƒ«") (ref obj 'musume-name))
         (map
          (lambda (song)
            (cons
@@ -53,7 +53,7 @@
                                      (body   :body #f))
     (a/cont/ (@@/ (cont ** action))
              (or  body
-                  "¥È¥Ã¥×"))))
+                  "ãƒˆãƒƒãƒ—"))))
 
 (define-method label-of ((obj <musume>))
   (let ((unit (unit-of obj)))
@@ -130,7 +130,7 @@
 			 '()
 			 units))))
 	    (div/
-	     (h1/ (format ($$ "¸¡º÷Ê¸»úÎó: ~a (~a ·ï)") word (length hits)))
+	     (h1/ (format ($$ "æ¤œç´¢æ–‡å­—åˆ—: ~a (~a ä»¶)") word (length hits)))
 	     (map/ (lambda (hit)
 		     (fieldset/
 		      (legend/ (car hit))
@@ -144,6 +144,6 @@
 				      match)))))
 			    (cdr hit))))
 		   hits)))
-	  (h1/ (format ($$ "¸¡º÷Ê¸»úÎó¤¬Ã»¤¹¤®¤Ş¤¹: ~a") word))))
+	  (h1/ (format ($$ "æ¤œç´¢æ–‡å­—åˆ—ãŒçŸ­ã™ãã¾ã™: ~a") word))))
 
     (kagoiri-page (search-result))))

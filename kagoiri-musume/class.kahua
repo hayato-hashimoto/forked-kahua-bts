@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -146,11 +146,11 @@
 ;      Warning
 ;      Logging
 ; lev: Level    TYPE:<integer>
-;      1: ¶ÛµÞÅÙÂç
-;      2: ½ÅÍ×
-;      3: ÉáÄÌ
-;      4: ·ÚÈù
-;      5: ¤Û¤ÜÌµ»ë
+;      1: ç·Šæ€¥åº¦å¤§
+;      2: é‡è¦
+;      3: æ™®é€š
+;      4: è»½å¾®
+;      5: ã»ã¼ç„¡è¦–
 ;
 (define (error-log-write cat lev msg)
   (and (>= *kagoiri-error-level* lev)

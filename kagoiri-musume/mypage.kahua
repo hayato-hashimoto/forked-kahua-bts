@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -12,7 +12,7 @@
     ((_ node ...)
      (permission-check-page
       identity
-      ($$ "¥Ş¥¤¥Ú¡¼¥¸¤Ï°ìÈÌ¥æ¡¼¥¶¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
+      ($$ "ãƒã‚¤ãƒšãƒ¼ã‚¸ã¯ä¸€èˆ¬ãƒ¦ãƒ¼ã‚¶ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
       (node-set/ node ...)))))
 
 (define-entry-method mypage ()
@@ -28,13 +28,13 @@
          (map/ (lambda (msg)
                  (th/ (clickable msg)))
                (drop-right $property-headers$ 1)))
-    (let1 filter-row "filter_table(this, 'musume_list', 'Á´¤Æ')"
+    (let1 filter-row "filter_table(this, 'musume_list', 'å…¨ã¦')"
       (define (prop-dropdown/ props-of prop propname)
         (td/ (select/
               (@/ (onchange filter-row)
                   (name propname))
               (node-set
-               (cons (option/ (@/ (value "*all*")) ($$ "Á´¤Æ"))
+               (cons (option/ (@/ (value "*all*")) ($$ "å…¨ã¦"))
                      (options ;; (props-of unit)
                       (make-kahua-collection
                        (find-kahua-class
@@ -57,13 +57,13 @@
        (thead/
         (tr/
          (@/ (onclick "sort_table(event);return false"))
-         (th/ (@/ (value "title")) ($$ "¥¿¥¤¥È¥ë"))
-         (th/ (@/ (value "priority")) ($$ "Í¥ÀèÅÙ"))
-         (th/ (@/ (value "status")) ($$ "¥¹¥Æ¡¼¥¿¥¹"))
-         (th/ (@/ (value "type")) ($$ "¥¿¥¤¥×"))
-         (th/ (@/ (value "ltime")) ($$ "´ü¸Â"))
-	 (th/ (@/ (value "ctime")) ($$ "ÅĞÏ¿Æü"))
-	 (th/ (@/ (value "mtime")) ($$ "¹¹¿·Æü"))))
+         (th/ (@/ (value "title")) ($$ "ã‚¿ã‚¤ãƒˆãƒ«"))
+         (th/ (@/ (value "priority")) ($$ "å„ªå…ˆåº¦"))
+         (th/ (@/ (value "status")) ($$ "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹"))
+         (th/ (@/ (value "type")) ($$ "ã‚¿ã‚¤ãƒ—"))
+         (th/ (@/ (value "ltime")) ($$ "æœŸé™"))
+	 (th/ (@/ (value "ctime")) ($$ "ç™»éŒ²æ—¥"))
+	 (th/ (@/ (value "mtime")) ($$ "æ›´æ–°æ—¥"))))
        (tbody/
         (map/ (lambda (m)
                 (let1 status (status-of m)
@@ -96,8 +96,8 @@
 
 (define-entry-method mypage ("recent")
   (mypage-main
-   (navigation/ (kahua-current-user) "ºÇ¶á¤Î¹¹¿·")
-   (h2/ ($$ "ºÇ¶á¤Î¹¹¿·"))
+   (navigation/ (kahua-current-user) "æœ€è¿‘ã®æ›´æ–°")
+   (h2/ ($$ "æœ€è¿‘ã®æ›´æ–°"))
    (let* ((units (filter (cut fan-to? <> (current-fan))
 			 (all-units)))
 	  (songs (append-map recent-of  units))
@@ -111,41 +111,41 @@
 		(fieldset/
 		 (legend/ (label-of m))
 		 (dt/
-		  (format "¢ö~a. ~a[~a]"
+		  (format "â™ª~a. ~a[~a]"
 			  (seq-no-of s)
 			  (sys-strftime "%Y/%m/%d %H:%M:%S" (sys-localtime (ctime-of s)))
 			  (fan-name-of (fan-of s))))
 		 (if (delete-of s)
-		     (p/ (@/ (class "warning rectangle")) ($$ "¤³¤Î¥á¥í¥Ç¥£¤Ïºï½ü¤µ¤ì¤Æ¤Ş¤¹"))
+		     (p/ (@/ (class "warning rectangle")) ($$ "ã“ã®ãƒ¡ãƒ­ãƒ‡ã‚£ã¯å‰Šé™¤ã•ã‚Œã¦ã¾ã™"))
 		     (p/ (@/ (class "rectangle"))
 			 (melody-format (melody-of s))))))))
 	   songs))))
 
 (define-entry-method mypage ("bookmark")
   (mypage-main
-   (navigation/ (kahua-current-user) ($$ "¥Ö¥Ã¥¯¥Ş¡¼¥¯"))
-   (h2/ ($$ "¥Ö¥Ã¥¯¥Ş¡¼¥¯"))
+   (navigation/ (kahua-current-user) ($$ "ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯"))
+   (h2/ ($$ "ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯"))
    (let1 musumes (or (ref (current-fan) 'bookmark) '())
        (format "~a item(s)" (length musumes))
        (table/ (@/ (class "listing"))
-               (thead/ (tr/ (th/ ($$ "ºï½ü"))
-                            (th/ ($$ "¥¿¥¤¥È¥ë"))
-                            (th/ ($$ "Í¥ÀèÅÙ"))
-                            (th/ ($$ "¥¹¥Æ¡¼¥¿¥¹"))
-                            (th/ ($$ "¥¿¥¤¥×"))
-                            (th/ ($$ "ÅĞÏ¿Æü"))))
+               (thead/ (tr/ (th/ ($$ "å‰Šé™¤"))
+                            (th/ ($$ "ã‚¿ã‚¤ãƒˆãƒ«"))
+                            (th/ ($$ "å„ªå…ˆåº¦"))
+                            (th/ ($$ "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹"))
+                            (th/ ($$ "ã‚¿ã‚¤ãƒ—"))
+                            (th/ ($$ "ç™»éŒ²æ—¥"))))
                (tbody/
                 (map/ (lambda (m)
                         (let1 status (status-of m)
                           (tr/ (@/ (class #`"status-,(code-of status)"))
                                (td/ (a/cont/ (@/ (onClick (format "return confirm('~a')?true:false"
-                                                                  ($$ "ËÜÅö¤Ëºï½ü¤·¤Ş¤¹¤«¡©"))))
+                                                                  ($$ "æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ"))))
                                              (@@/ (cont
                                                    (lambda ()
                                                      (update! (ref (current-fan) 'bookmark)
                                                               (cut delete m  <>))
                                                      (redirect-page "mypage/bookmark"))))
-                                             ($$ "ºï½ü")))
+                                             ($$ "å‰Šé™¤")))
                                (td/ (label-of m))
                                (td/ (disp-name-of (priority-of m)))
                                (td/ (disp-name-of status))
@@ -156,29 +156,29 @@
 
 (define-entry-method mypage ("bookmark")
   (mypage-main
-   (navigation/ (kahua-current-user) ($$ "¥Ö¥Ã¥¯¥Ş¡¼¥¯"))
-   (h2/ ($$ "¥Ö¥Ã¥¯¥Ş¡¼¥¯"))
+   (navigation/ (kahua-current-user) ($$ "ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯"))
+   (h2/ ($$ "ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯"))
    (let1 musumes (or (ref (current-fan) 'bookmark) '())
        (format "~a item(s)" (length musumes))
        (table/ (@/ (class "listing"))
-               (thead/ (tr/ (th/ ($$ "ºï½ü"))
-                            (th/ ($$ "¥¿¥¤¥È¥ë"))
-                            (th/ ($$ "Í¥ÀèÅÙ"))
-                            (th/ ($$ "¥¹¥Æ¡¼¥¿¥¹"))
-                            (th/ ($$ "¥¿¥¤¥×"))
-                            (th/ ($$ "ÅĞÏ¿Æü"))))
+               (thead/ (tr/ (th/ ($$ "å‰Šé™¤"))
+                            (th/ ($$ "ã‚¿ã‚¤ãƒˆãƒ«"))
+                            (th/ ($$ "å„ªå…ˆåº¦"))
+                            (th/ ($$ "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹"))
+                            (th/ ($$ "ã‚¿ã‚¤ãƒ—"))
+                            (th/ ($$ "ç™»éŒ²æ—¥"))))
                (tbody/
                 (map/ (lambda (m)
                         (let1 status (status-of m)
                           (tr/ (@/ (class #`"status-,(code-of status)"))
                                (td/ (a/cont/ (@/ (onClick (format "return confirm('~a')?true:false"
-                                                                  ($$ "ËÜÅö¤Ëºï½ü¤·¤Ş¤¹¤«¡©"))))
+                                                                  ($$ "æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ"))))
                                              (@@/ (cont
                                                    (lambda ()
                                                      (update! (ref (current-fan) 'bookmark)
                                                               (cut delete m  <>))
                                                      (redirect-page "mypage/bookmark"))))
-                                             ($$ "ºï½ü")))
+                                             ($$ "å‰Šé™¤")))
                                (td/ (label-of m))
                                (td/ (disp-name-of (priority-of m)))
                                (td/ (disp-name-of status))
@@ -192,8 +192,8 @@
 ;;;
 (define-entry-method mypage ("calender")
   (mypage-main
-   (navigation/ (kahua-current-user) ($$ "¥«¥ì¥ó¥À¡¼"))
-   (h2/ ($$ "¥«¥ì¥ó¥À¡¼"))
+   (navigation/ (kahua-current-user) ($$ "ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼"))
+   (h2/ ($$ "ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼"))
    (div/ (@/ (id "limit-calendar"))
 	   (task-calendar-table/ (today)))))
 
@@ -202,22 +202,22 @@
 	 (cuser-name (ref cuser 'login-name)))
     (permission-check-page
      identity
-     ($$ "¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹¤Ë¤Ï°ìÈÌ¥æ¡¼¥¶¤Î¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
-     (navigation/ (kahua-current-user) "¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹")
-     (h3/ (format ($$ "~a ¤µ¤ó¤Î¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹") cuser-name))
+     ($$ "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´ã«ã¯ä¸€èˆ¬ãƒ¦ãƒ¼ã‚¶ã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
+     (navigation/ (kahua-current-user) "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´")
+     (h3/ (format ($$ "~a ã•ã‚“ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´") cuser-name))
      (form/cont/
       (@@/ (cont (entry-lambda (:keyword old-pw new-pw new-again-pw)
 		     (cond ((or (equal? "" new-pw)
 				(equal? "" new-again-pw)
 				(not (equal? new-pw new-again-pw)))
-			    (change-passwd ($$ "¿·¥Ñ¥¹¥ï¡¼¥É¤¬ÉÔÀµ¤Ç¤¹")))
+			    (change-passwd ($$ "æ–°ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒä¸æ­£ã§ã™")))
 			   ((not (kahua-check-user cuser-name old-pw))
-			    (change-passwd ($$ "µì¥Ñ¥¹¥ï¡¼¥É¤¬ÉÔÀµ¤Ç¤¹")))
+			    (change-passwd ($$ "æ—§ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒä¸æ­£ã§ã™")))
 			   (else
 			    (kahua-user-password-change-force cuser new-pw)
 			    (message-only-page
-			     (format ($$ "~a ¤µ¤ó¤Î¥Ñ¥¹¥ï¡¼¥É¤òÊÑ¹¹¤·¤Ş¤·¤¿") cuser-name)))))))
+			     (format ($$ "~a ã•ã‚“ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å¤‰æ›´ã—ã¾ã—ãŸ") cuser-name)))))))
       (change-passwrod-table/ "old-pw" "new-pw" "new-again-pw")
-      (input/ (@/ (type "submit") (name "submit") (value ($$ "ÊÑ¹¹"))))
+      (input/ (@/ (type "submit") (name "submit") (value ($$ "å¤‰æ›´"))))
       (p/ (@/ (class "warning")) (node-set message))
       ))))

@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -36,7 +36,7 @@
 	      new-tags-list
 	      tags-list))))
 
-;; ¥¤¥Ş¥¤¥Á
+;; ã‚¤ãƒã‚¤ãƒ
 ;;
 (define-checker-tags admin: admin?
   (a/ a/cont/ dd/ div/ dt/ form/ form/cont/ h1/ h2/ h3/ h4/ h5/ h6/
@@ -103,19 +103,19 @@
   (list/
    (div/ (@/ (class "clickable")
 	     (onclick #`"up_select(this,, ',|props|')"))
-	 "¢¬")
+	 "â†‘")
    (div/ (@/ (class "clickable")
 	     (onclick #`"down_select(this,, ',|props|')"))
-	 "¢­")))
+	 "â†“")))
 (define (change-passwrod-table/ old new again)
   (table/
-   (tr/ (th/ ($$ "µì¥Ñ¥¹¥ï¡¼¥É"))
+   (tr/ (th/ ($$ "æ—§ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰"))
 	(td/ (input/ (@/ (type "password") (name old) (id "focus")
 			 (value "")) "")))
-   (tr/ (th/ ($$ "¿·¥Ñ¥¹¥ï¡¼¥É"))
+   (tr/ (th/ ($$ "æ–°ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰"))
 	(td/ (input/ (@/ (type "password") (name new)
 			 (value "")) "")))
-   (tr/ (th/ ($$ "¿·¥Ñ¥¹¥ï¡¼¥É(³ÎÇ§)"))
+   (tr/ (th/ ($$ "æ–°ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰(ç¢ºèª)"))
 	(td/ (input/ (@/ (type "password") (name again)
 			 (value "")) "")))))
 
@@ -140,30 +140,30 @@
          (groups-of group))))
 
 (define (require-fan-message unit)
-  (format ($$ "¡Ø~a¡Ù¤Î¥Õ¥¡¥ó¤È¤·¤Æ¤Î¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹") (unit-name-of unit)))
+  (format ($$ "ã€~aã€ã®ãƒ•ã‚¡ãƒ³ã¨ã—ã¦ã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™") (unit-name-of unit)))
 
 (define (inter-unit-search-box/ unit-id)
   (div/
    (@/ (id "search-box"))
    (form/cont/
     (@@/ (cont search `(unit-id ,unit-id)))
-    ($$ "¥æ¥Ë¥Ã¥ÈÆâ¸¡º÷:")
+    ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆå†…æ¤œç´¢:")
     (input/ (@/ (onKeyUp "delay_search(this.value)")
 		(onKeyDown "search_onKeyDown(event)")
 		(type "text") (name "word") (size 10)
 		(id "focus")))
-    (input/ (@/ (type "submit") (value ($$ "¸¡º÷")))))))
+    (input/ (@/ (type "submit") (value ($$ "æ¤œç´¢")))))))
 
 (define (musume-table/ unit musumes status-hash)
   (table/
    (@/ (class "listing") (id "musume_list"))
    (thead/
     (span/ (@/ (id "musume_count")))
-    (cond ((= 0 (length musumes)) ($$ "Ë¨¤¨¤é¤ì¤ëÌ¼¡£¤¬¤¤¤Ş¤»¤ó(T^T)"))
-	  ((= 1 (length musumes)) ($$ "¤¿¤À¤Ò¤È¤ê¤ÎÌ¼¡£¤ËË¨¤¨¤Ş¤·¤¿"))
-	  ((> 100 (length musumes)) (format ($$ "~a¿Í¤ÎÌ¼¡£¤ËË¨¤¨¤Ş¤·¤¿") (length musumes)))
-	  ((> 500 (length musumes)) (format ($$  "~a¿Í¤â¤ÎÌ¼¡£¤ËË¨¤¨¤Ş¤·¤¿(Ë¨¤¨¤¹¤®¤Ç¤¹)") (length musumes)))
-	  (else (format ($$  "¤Ê¤ó¤È~a¿Í¤â¤ÎÌ¼¡£¤ËË¨¤¨¤Ş¤Ä¤­¤Ş¤·¤¿ orz") (length musumes))))
+    (cond ((= 0 (length musumes)) ($$ "èŒãˆã‚‰ã‚Œã‚‹å¨˜ã€‚ãŒã„ã¾ã›ã‚“(T^T)"))
+	  ((= 1 (length musumes)) ($$ "ãŸã ã²ã¨ã‚Šã®å¨˜ã€‚ã«èŒãˆã¾ã—ãŸ"))
+	  ((> 100 (length musumes)) (format ($$ "~aäººã®å¨˜ã€‚ã«èŒãˆã¾ã—ãŸ") (length musumes)))
+	  ((> 500 (length musumes)) (format ($$  "~aäººã‚‚ã®å¨˜ã€‚ã«èŒãˆã¾ã—ãŸ(èŒãˆã™ãã§ã™)") (length musumes)))
+	  (else (format ($$  "ãªã‚“ã¨~aäººã‚‚ã®å¨˜ã€‚ã«èŒãˆã¾ã¤ãã¾ã—ãŸ orz") (length musumes))))
     (div/ (@/ (id "status-num"))
 	  (map/ (lambda (s)
 		  (let1 statusid (code-of s)
@@ -174,20 +174,20 @@
 		(statuss-of unit)))
     (tr/ (@/ (onclick "sort_table(event);return false"))
          (th/ (@/ (value "flesh-meter"))
-	      ($$ "¹¹¿·ÅÙ"))
+	      ($$ "æ›´æ–°åº¦"))
 	 (th/ (@/ (value "no"))
 	      ($$ "No."))
 	 (th/ (@/ (value "title"))
-	      ($$ "¥¿¥¤¥È¥ë"))
+	      ($$ "ã‚¿ã‚¤ãƒˆãƒ«"))
 	 (map/ (lambda (props-of prop msg)
 		 (has-item? unit props-of
 			    (th/ (@/ (value prop)) msg)))
 	       $properties-accessor-list$
 	       $property-list$
 	       $property-headers$)
-	 (th/ (@/ (value "ltime")) ($$ "´ü¸Â"))
-	 (th/ (@/ (value "ctime")) ($$ "ÅĞÏ¿Æü"))
-	 (th/ (@/ (value "mtime")) ($$ "¹¹¿·Æü"))))
+	 (th/ (@/ (value "ltime")) ($$ "æœŸé™"))
+	 (th/ (@/ (value "ctime")) ($$ "ç™»éŒ²æ—¥"))
+	 (th/ (@/ (value "mtime")) ($$ "æ›´æ–°æ—¥"))))
    (tbody/
     (map/ (lambda (m)
 	    (define (prop-td/ prop-of props-of code disp)
@@ -257,31 +257,31 @@
 		   (has-item? unit props-of (th/ msg)))
 		 (drop-right $properties-accessor-list$ 1)
 		 (drop-right $property-headers$ 1))
-	   (th/ ($$ "¥¢¥µ¥¤¥ó")))
+	   (th/ ($$ "ã‚¢ã‚µã‚¤ãƒ³")))
 	  (tr/
 	   (map/ make-col $property-list$ $properties-accessor-list$)
-	   (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "¿·¤·¤¤Ì¼¡£²ÃÆş"))))))))
+	   (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "æ–°ã—ã„å¨˜ã€‚åŠ å…¥"))))))))
     (td/ (@/ (rowspan 2) (id "limit-calendar"))
 	 (calendar/ date limit-date target-date getter setter)))
    (tr/
-    (td/ (table/ (tr/ (td/ ($$ "¥¿¥¤¥È¥ë") (span/ (@/ (class "warning")) ($$ "(¢¨)")))
+    (td/ (table/ (tr/ (td/ ($$ "ã‚¿ã‚¤ãƒˆãƒ«") (span/ (@/ (class "warning")) ($$ "(â€»)")))
 		      (td/ (input/ (@/ (type "text") (name "name")
 				       (id "focus") (size 80)))
 			   (error:span/ (@/ (class "warning")) (set-error-message #f))))
                  (tr/
                   (td/)
                   (td/ (span/ (@/ (onclick (format "popup_linkselect(event, ~s)" (key-of unit))))
-                              (clickable ($$ "Ì¼¤Ø¤Î¥ê¥ó¥¯")))
+                              (clickable ($$ "å¨˜ã¸ã®ãƒªãƒ³ã‚¯")))
                        (span/ (@/ (onclick (format "mail_send_setting(event, ~s)" (key-of unit))))
-                                       (clickable ($$ "¥á¡¼¥ëÁ÷¿®ÂĞ¾İ")))))
-		 (tr/ (td/ ($$ "ÆâÍÆ"))
+                                       (clickable ($$ "ãƒ¡ãƒ¼ãƒ«é€ä¿¡å¯¾è±¡")))))
+		 (tr/ (td/ ($$ "å†…å®¹"))
 		      (td/ (textarea/ (@/ (type "text") (name "melody") (id "melody")
 					  (rows 20) (cols 80)))))
-		 (tr/ (td/ ($$ "¥Õ¥¡¥¤¥ë"))
+		 (tr/ (td/ ($$ "ãƒ•ã‚¡ã‚¤ãƒ«"))
 		      (td/ (input/ (@/ (type "file") (name "file")))
 			   (input/ (@/ (type "hidden") (name "filename") (value ""))))))))
    (tr/
-    (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "¿·¤·¤¤Ì¼¡£²ÃÆş"))))))))
+    (td/ (input/ (@/ (type "button") (onclick "submit();") (value ($$ "æ–°ã—ã„å¨˜ã€‚åŠ å…¥"))))))))
 
 ;;-------------------------------------------------------------
 ;; high level  parts collection
@@ -290,11 +290,11 @@
   (let1 unsubscriptions (unsubscriptions-of (current-fan))
     (table/ (@/ (class "listing"))
             (thead/
-             (tr/ (th/ ($$ "¥æ¥Ë¥Ã¥ÈÌ¾"))
-                  (th/ ($$  "³µÍ×"))
+             (tr/ (th/ ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆå"))
+                  (th/ ($$  "æ¦‚è¦"))
                   (th/ (@/ (nowrap "nowrap"))
-                        ($$ "¥Õ¥¡¥ó"))
-                  (th/ ($$ "¹ØÆÉ"))
+                        ($$ "ãƒ•ã‚¡ãƒ³"))
+                  (th/ ($$ "è³¼èª­"))
                   (devel:th/)))
             (tbody/
              (node-set
@@ -306,7 +306,7 @@
                        (td/ (@/ (nowrap "nowrap"))
                             (when/ (public-of u)
                               (span/  (@/ (style "color:red"))
-                                      "[¸ø³«]"))
+                                      "[å…¬é–‹]"))
                             (link-of u)
                             (format " (~a)"
                                     (length (all-active-musumes u))))
@@ -323,7 +323,7 @@
                                              (format "Element.show('~a'); cm(event, $('~a'));" id id)
                                                          )
                                             (onmouseout (js/hide id)))
-                                        (length members) ($$ "¿Í")))
+                                        (length members) ($$ "äºº")))
                                 (div/ (@/ (id id)
                                           (style "position:absolute;display:none;background-color:white;border:1px solid black;padding:3px"))
                                       (map/ div/ members))
@@ -333,8 +333,8 @@
                           (let1 subscription? (not (memq u unsubscriptions))
                             (a/cont/ (@/ (class "clickable")
 					 (title (if subscription?
-						    ($$ "Ì¼¡£¤«¤é¤Î¤ªÊØ¤ê¤òÄä»ß¤·¤Ş¤¹")
-						    ($$ "Ì¼¡£¤«¤é¤Î¤ªÊØ¤ê¤ò¤â¤é¤¦"))))
+						    ($$ "å¨˜ã€‚ã‹ã‚‰ã®ãŠä¾¿ã‚Šã‚’åœæ­¢ã—ã¾ã™")
+						    ($$ "å¨˜ã€‚ã‹ã‚‰ã®ãŠä¾¿ã‚Šã‚’ã‚‚ã‚‰ã†"))))
 				     (@@/ (cont (cut (lambda ()
                                                        (update! (ref (current-fan) 'unsubscriptions)
                                                                 (lambda (ls)
@@ -346,10 +346,10 @@
 									(delete u ls)))))
                                                        (redirect/cont (cont **))))))
                                      (if subscription?
-                                         ($$ "¡û")
-					 ($$ "¡ß"))))))
+                                         ($$ "â—‹")
+					 ($$ "Ã—"))))))
                        (devel:td/ (@/ (nowrap "nowrap"))
-                                  (clickable (link-of u :action "edit" :body ($$ "ÀßÄê"))))
+                                  (clickable (link-of u :action "edit" :body ($$ "è¨­å®š"))))
                        )))
                (all-units)))))))
 
@@ -357,8 +357,8 @@
   (let1 unit (get-optional unit #f)
     (devel:list/
      (h2/ (if unit
-	      (format ($$ "¡Ø~a¡Ù¥æ¥Ë¥Ã¥ÈÀßÄê") (unit-name-of unit))
-	      ($$ "¿·¥æ¥Ë¥Ã¥È·ëÀ®")))
+	      (format ($$ "ã€~aã€ãƒ¦ãƒ‹ãƒƒãƒˆè¨­å®š") (unit-name-of unit))
+	      ($$ "æ–°ãƒ¦ãƒ‹ãƒƒãƒˆçµæˆ")))
 
      (if unit
          (admin:div/
@@ -366,9 +366,9 @@
                (li/
                 (a/cont/
                  (@/ (onClick (format "return confirm('~a')?true:false"
-                                      ($$ "ËÜÅö¤Ëºï½ü¤·¤Ş¤¹¤«¡©"))))
+                                      ($$ "æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ"))))
                  (@@/ (cont unit-fallout (key-of unit)))
-                 ($$ "ºï½ü")))))
+                 ($$ "å‰Šé™¤")))))
        "")
 
      (form/cont/
@@ -378,7 +378,7 @@
                     (if (or (string-null? name)
 			     (null? (kahua-context-ref* "fans")))
 			 (begin
-			   (set-error-message ($$ "¥æ¥Ë¥Ã¥ÈÌ¾ÆşÎÏ¤È¥Õ¥¡¥óÁªÂò¤ÏÉ¬¿Ü¤Ç¤¹¡£"))
+			   (set-error-message ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆåå…¥åŠ›ã¨ãƒ•ã‚¡ãƒ³é¸æŠã¯å¿…é ˆã§ã™ã€‚"))
 			   (if unit
                                (redirect-to unit "edit")
                              (redirect/cont (cont **))))
@@ -390,10 +390,10 @@
                     (redirect/cont (cont **)))))
       (table/
        (tr/ (@/ (onclick "toggle_fulllist(event)"))
-	    (th/ (@/ (colspan 2)) (clickable ($$ "Í¥ÀèÅÙ")))
-	    (th/ (@/ (colspan 2)) (clickable ($$ "¥¹¥Æ¡¼¥¿¥¹")))
-	    (th/ (@/ (colspan 2)) (clickable ($$ "¥¿¥¤¥×")))
-	    (th/ (@/ (colspan 2)) (clickable ($$ "¥«¥Æ¥´¥ê"))))
+	    (th/ (@/ (colspan 2)) (clickable ($$ "å„ªå…ˆåº¦")))
+	    (th/ (@/ (colspan 2)) (clickable ($$ "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹")))
+	    (th/ (@/ (colspan 2)) (clickable ($$ "ã‚¿ã‚¤ãƒ—")))
+	    (th/ (@/ (colspan 2)) (clickable ($$ "ã‚«ãƒ†ã‚´ãƒª"))))
        (tr/
 	(map/ (lambda (n items)
 		(list/
@@ -418,7 +418,7 @@
 		  (map (lambda (all) (all))
 		       (drop-right $all-properties-list$ 1))))))
       (table/
-       (tr/ (td/ ($$ "ÈóÉ½¼¨¥¹¥Æ¡¼¥¿¥¹"))
+       (tr/ (td/ ($$ "éè¡¨ç¤ºã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹"))
 	    (td/
              (select/ (@/ (name "non-display-statuss") (size "5") (multiple "true"))
                       (map/ (lambda (item)
@@ -429,17 +429,17 @@
                                 (option/ (@/ (value (code-of item)))
                                          (disp-name-of item))))
                             (all-statuss)))))
-       (tr/ (td/ ($$ "¥æ¥Ë¥Ã¥ÈÌ¾") (span/ (@/ (class "warning")) ($$ "(¢¨)")))
+       (tr/ (td/ ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆå") (span/ (@/ (class "warning")) ($$ "(â€»)")))
 	    (td/
 	     (input/ (@/ (type "text") (name "name") (size 80) (value (if unit (unit-name-of unit) ""))))
 	     (error:span/ (@/ (class "warning")) (set-error-message #f))))
-       (tr/ (td/ ($$  "³µÍ×"))
+       (tr/ (td/ ($$  "æ¦‚è¦"))
 	    (td/ (@/ (colspan 2))
 		 (textarea/ (@/ (type "text") (name "desc")
 				(rows 10) (cols 80))
 			    (if unit (description-of unit) ""))))
        (tr/ (@/ (align "left"))
-	    (td/ ($$ "¥Õ¥¡¥ó") (span/ (@/ (class "warning")) ($$ "(¢¨)")))
+	    (td/ ($$ "ãƒ•ã‚¡ãƒ³") (span/ (@/ (class "warning")) ($$ "(â€»)")))
 	    (td/
              (receive (fans members)
                  (if unit
@@ -457,7 +457,7 @@
                             fans)))
                  (td/ "<=")
                  (td/ (@/ (id "allmemberlistblock"))
-                      ($$ "¸¡º÷") ":" (input/ (@/ (id "membersearch") (type "text") (onkeyup "filter_member(this.value)")))
+                      ($$ "æ¤œç´¢") ":" (input/ (@/ (id "membersearch") (type "text") (onkeyup "filter_member(this.value)")))
                       (ul/ (@/ (id "allmemberlist") (class "userlist")
                                (ondblclick "move_to(event,'memberlist')"))
                            (map/
@@ -484,32 +484,32 @@
                                :containment "memberlist"
                                ))
                  )))))
-       (tr/ (td/ ($$ "ÄÌÃÎ¥¢¥É¥ì¥¹"))
+       (tr/ (td/ ($$ "é€šçŸ¥ã‚¢ãƒ‰ãƒ¬ã‚¹"))
             (td/
              (textarea/ (@/ (type "text") (name "notify-addresses")
                             (rows 2) (cols 20))
                         (if unit (string-join
                                   (notify-addresses-of unit) "\n")
                           ""))))
-       (tr/ (td/ ($$ "¸ø³«"))
+       (tr/ (td/ ($$ "å…¬é–‹"))
             (td/
              (input/ (@/ (type "checkbox") (name "public") (id "public")
                          (checked (and unit (public-of unit)))))
-             (label/ (@/ (for "public")) ($$ "¸ø³«"))))
+             (label/ (@/ (for "public")) ($$ "å…¬é–‹"))))
        )
       (if unit
-	  (input/ (@/ (type "submit") (value ($$ "³ÎÄê"))))
-        (input/ (@/ (type "submit") (value ($$ "¿·¥æ¥Ë¥Ã¥È·ëÀ®")))))))))
+	  (input/ (@/ (type "submit") (value ($$ "ç¢ºå®š"))))
+        (input/ (@/ (type "submit") (value ($$ "æ–°ãƒ¦ãƒ‹ãƒƒãƒˆçµæˆ")))))))))
 
 ;;-------------------------------------------------------------
 ;; calendar
 ;;-------------------------------------------------------------
 ;;
-;; date¤Ï¥Ç¥Õ¥©¥ë¥Èº£Æü¤Ç°ÜÆ°¤¹¤ì¤Ğ¤½¤Î·î¤ÎÆüÉÕ¡¢
-;; date: ¤³¤ì¤ÇÉ½¼¨¤¹¤ë·î¤ò·èÄê
-;; limit: ¸½ºßmusume¤ËÀßÄê¤µ¤ì¤Æ¤¤¤ë´ü¸Â
-;; target: ÁªÂòÃæ¤Î´ü¸Â
-;; getter/setter: target¤ËÂĞ¤¹¤ë¥¢¥¯¥»¥µ
+;; dateã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆä»Šæ—¥ã§ç§»å‹•ã™ã‚Œã°ãã®æœˆã®æ—¥ä»˜ã€
+;; date: ã“ã‚Œã§è¡¨ç¤ºã™ã‚‹æœˆã‚’æ±ºå®š
+;; limit: ç¾åœ¨musumeã«è¨­å®šã•ã‚Œã¦ã„ã‚‹æœŸé™
+;; target: é¸æŠä¸­ã®æœŸé™
+;; getter/setter: targetã«å¯¾ã™ã‚‹ã‚¢ã‚¯ã‚»ã‚µ
 ;;
 (define (day/ date) (x->string (date-day date)))
 (define (month/ date) (x->string (date-month date)))
@@ -518,25 +518,25 @@
 
 (define (calendar-header/ parent/ date . args)
   (tr/ (@/ (class "operation"))
-       (th/ (a/cont/async/ (@/ (title ($$ "Á°Ç¯¤Ø")))
+       (th/ (a/cont/async/ (@/ (title ($$ "å‰å¹´ã¸")))
 			   (@@/ (id "limit-calendar")
 				(cont (lambda _
 					(apply parent/ (nth-month-before 12 date) args)))) "<<"))
-       (th/ (a/cont/async/ (@/ (title ($$ "Á°·î¤Ø")))
+       (th/ (a/cont/async/ (@/ (title ($$ "å‰æœˆã¸")))
 			   (@@/ (id "limit-calendar")
 				(cont (lambda _
 					(apply parent/ (prev-month date) args)))) "<"))
        (th/ (@/ (colspan 3))
-	    (a/cont/async/ (@/ (title ($$ "¸½ºß¤Î·î¤Ø")))
+	    (a/cont/async/ (@/ (title ($$ "ç¾åœ¨ã®æœˆã¸")))
 			   (@@/ (id "limit-calendar")
 				(cont (lambda _
 					(apply parent/ (today) args))))
 			   (format "~4a - ~2,,,'0@a" (year/ date) (month/ date))))
-       (th/ (a/cont/async/ (@/ (title ($$ "¼¡·î¤Ø")))
+       (th/ (a/cont/async/ (@/ (title ($$ "æ¬¡æœˆã¸")))
 			   (@@/ (id "limit-calendar")
 				(cont (lambda _
 					(apply parent/ (next-month date) args)))) ">"))
-       (th/ (a/cont/async/ (@/ (title ($$ "¼¡Ç¯¤Ø")))
+       (th/ (a/cont/async/ (@/ (title ($$ "æ¬¡å¹´ã¸")))
 			   (@@/ (id "limit-calendar")
 				(cont (lambda _
 					(apply parent/ (nth-month-after 12 date) args)))) ">>"))))
@@ -545,18 +545,18 @@
 (define (calendar/ date limit target getter setter)
   (table/
    (@/ (class "calendar"))
-   (caption/ (@/ (class "calendar")) ($$ "´ü¸Â"))
+   (caption/ (@/ (class "calendar")) ($$ "æœŸé™"))
    (tr/ (@/ (class "limit-fromto"))
 	(td/ (@/ (colspan 3))
 	     (if limit (ymd/ limit) ""))
-	(td/ (if (or limit target) "¢ª" ""))
+	(td/ (if (or limit target) "â†’" ""))
 	(td/ (@/ (colspan 3))
 	     (if target (ymd/ target) "")))
    (calendar-header/ calendar/ date limit target getter setter)
    (tr/ (@/ (class "weekname"))
 	(map/ (lambda (w a)
 		(th/ (@/ (class a)) (x->string w)))
-	      "Æü·î²Ğ¿åÌÚ¶âÅÚ"
+	      "æ—¥æœˆç«æ°´æœ¨é‡‘åœŸ"
 	      '("sunday" "workday" "workday" "workday" "workday" "workday" "saturday")))
    (map/ (lambda (week)
 	   (tr/
@@ -581,21 +581,21 @@
 	 (date-slices-of-month date #t))
    (tr/ (@/ (class "calendar-footer"))
     (th/ (@/ (colspan 3))
-	 (a/cont/async/ (@/ (class "clickable") (title ($$ "´ü¸ÂÌµ¤·¤Ë¤·¤Ş¤¹")))
+	 (a/cont/async/ (@/ (class "clickable") (title ($$ "æœŸé™ç„¡ã—ã«ã—ã¾ã™")))
 			(@@/ (id "limit-calendar")
 			     (cont (lambda _
 				     (setter #f)
-				     (calendar/ (today) limit #f getter setter)))) ($$ "´ü¸Âºï½ü")))
+				     (calendar/ (today) limit #f getter setter)))) ($$ "æœŸé™å‰Šé™¤")))
     (th/ (help-button/ "calendar"))
     (th/ (@/ (colspan 3))
-	 (a/cont/async/ (@/ (class "clickable") (title ($$ "´ü¸Â¤ÎÊÑ¹¹¤ò¥­¥ã¥ó¥»¥ë¤·¤Ş¤¹")))
+	 (a/cont/async/ (@/ (class "clickable") (title ($$ "æœŸé™ã®å¤‰æ›´ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¾ã™")))
 			(@@/ (id "limit-calendar")
 			     (cont (lambda _
 				     (setter limit)
-				     (calendar/ (today) limit limit getter setter)))) ($$ "ÊÑ¹¹Ãæ»ß"))))))
+				     (calendar/ (today) limit limit getter setter)))) ($$ "å¤‰æ›´ä¸­æ­¢"))))))
 
 ;
-; ¥¿¥¹¥¯¥«¥ì¥ó¥À¡¼
+; ã‚¿ã‚¹ã‚¯ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼
 ;
 (define (task-calendar-table/ date)
   (define (collect-musumes-with-limit date)
@@ -609,7 +609,7 @@
    (calendar-header/ task-calendar-table/ date)
    (tr/ (map/ (lambda (w a)
 		(th/ (@/ (class a)) (x->string w)))
-	      "Æü·î²Ğ¿åÌÚ¶âÅÚ"
+	      "æ—¥æœˆç«æ°´æœ¨é‡‘åœŸ"
 	      '("sunday" "workday" "workday" "workday" "workday" "workday" "saturday")))
    (map/ (lambda (week)
 	   (tr/

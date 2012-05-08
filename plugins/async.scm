@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: scheme -*-
+;; -*- coding: utf8; mode: scheme -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -100,14 +100,14 @@
 
 #|
 (a/cont/sync:
- (@@: (cont ¡Ä)
+ (@@: (cont â€¦)
       (id "worker-table"))
  "Refresh")
 
 ->
 
-<a href='¡Ä'
-   onClick='; return async_get(event, "worker-table","¡Ä")'>
+<a href='â€¦'
+   onClick='; return async_get(event, "worker-table","â€¦")'>
   Refresh
 </a>
 |#

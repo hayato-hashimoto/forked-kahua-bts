@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -9,12 +9,12 @@
 (load "kagoiri-musume/version.kahua")
 
 (define-if-not-bound *kagoiri-musume-title*
-  "äÆÆşÌ¼¡£ - Groupie System")
+  "ç± å…¥å¨˜ã€‚ - Groupie System")
 
 (define-constant *content-type*
   (format "text/html; charset=~a"
 	  (case (gauche-character-encoding)
-	    ((euc-jp) 'EUC-JP)
+	    ((utf8) 'EUC-JP)
 	    ((utf-8)  'UTF-8)
 	    ((sjis)   'Shift_JIS)
 	    (else     'EUC-JP))))	; Fit w/ kahua.cgi.in
@@ -43,7 +43,7 @@
                              "kagoiri-musume/javascripts/scriptaculous.js"))))
           (script/ (@/ (type "text/javascript"))
                    (format "var kahua_self_uri_full = '~a';" (kahua-self-uri-full))
-                   (format "var kahua_loading_msg = '~a';" ($$ "ÆÉ¤ß¹ş¤ßÃæ")))
+                   (format "var kahua_loading_msg = '~a';" ($$ "èª­ã¿è¾¼ã¿ä¸­")))
           (script/ (@/ (type "text/javascript")
                        (src (kahua-static-document-url
                              "kagoiri-musume/javascripts/async.js"))))
@@ -85,7 +85,7 @@
 	       (a/cont/
 		(@/ (class "clickable"))
 		(@@/ (cont admin-system))
-		($$ "¥·¥¹¥Æ¥à´ÉÍı")))
+		($$ "ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†")))
 	     (span/ ($$ " Now login:")
 		    (a/cont/ (@/ (class "clickable"))
 			     (@@/ (cont mypage))
@@ -98,7 +98,7 @@
 	    (form/cont/ (@/ (class "searchbox"))
 			(@@/ (cont search))
 			(input/ (@/ (type "text") (name "word") (size 10)))
-			(input/ (@/ (type "submit") (value ($$ "¸¡º÷"))))))))
+			(input/ (@/ (type "submit") (value ($$ "æ¤œç´¢"))))))))
    (div/ (@/ (id "body"))
          (node-set body))))
 
@@ -110,7 +110,7 @@
     (when cont
       (set! k cont))
     (kagoiri-page
-     (h1/ ($$ "äÆÆşÌ¼¡£¤Ø¤è¤¦¤³¤½¡ª"))
+     (h1/ ($$ "ç± å…¥å¨˜ã€‚ã¸ã‚ˆã†ã“ãï¼"))
      (h3/ message)
      (form/cont/
       (@@/ (cont (entry-lambda (:keyword name pass)
@@ -151,26 +151,26 @@
 (define-method navigation/ ((unit <unit>))
   (node-set/
    (div/ (@/ (id "navigation"))
-         (a/cont/ ($$ "¥È¥Ã¥×"))
+         (a/cont/ ($$ "ãƒˆãƒƒãƒ—"))
          " > "
          (span/ (@/ (class "current"))
                 (link-of unit)))
    (navigation-action/
 
     (pa$ equal? "new")
-    (link-of unit :action "new" :body ($$ "Ì¼²ÃÆş"))
+    (link-of unit :action "new" :body ($$ "å¨˜åŠ å…¥"))
 
     string->number
-    (link-of unit :body ($$ "°ìÍ÷"))
+    (link-of unit :body ($$ "ä¸€è¦§"))
 
     (pa$ equal? "edit")
-    (link-of unit :action "edit" :body ($$ "ÀßÄê")))))
+    (link-of unit :action "edit" :body ($$ "è¨­å®š")))))
 
 
 (define-method navigation/ ((musume <musume>))
   (node-set/
    (div/ (@/ (id "navigation"))
-         (a/cont/ ($$ "¥È¥Ã¥×"))
+         (a/cont/ ($$ "ãƒˆãƒƒãƒ—"))
          " > "
          (link-of (unit-of musume))
          " > "
@@ -181,19 +181,19 @@
     (a/cont/
      (@@/ (cont add-bookmark musume))
      (span/ (@/ (id "bookmark-button"))
-            ($$ "¥Ö¥Ã¥¯¥Ş¡¼¥¯ÄÉ²Ã")))
+            ($$ "ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯è¿½åŠ ")))
 
     string->number
-    (link-of (unit-of musume) :body ($$ "°ìÍ÷"))
+    (link-of (unit-of musume) :body ($$ "ä¸€è¦§"))
 
     (pa$ equal? "edit")
-    (link-of musume :action "edit" :body ($$ "ÀßÄê")))))
+    (link-of musume :action "edit" :body ($$ "è¨­å®š")))))
 
 (define-method navigation/ nodes
   (node-set/
    (div/ (@/ (id "navigation"))
          (span/ (@/ (class "current"))
-                (a/cont/ ($$ "¥È¥Ã¥×")))
+                (a/cont/ ($$ "ãƒˆãƒƒãƒ—")))
          (when/ (not (null? nodes))
            (apply node-set/
                   " > "
@@ -201,42 +201,42 @@
                                nodes))))
    (navigation-action/
     (pa$ equal? "new")
-    (link-of :action "new" :body ($$ "¥æ¥Ë¥Ã¥È·ëÀ®"))
+    (link-of :action "new" :body ($$ "ãƒ¦ãƒ‹ãƒƒãƒˆçµæˆ"))
 
     not
-    (link-of :body ($$ "°ìÍ÷"))
+    (link-of :body ($$ "ä¸€è¦§"))
     )))
 
 (define-method navigation/ ((fan <fan>) name)
   (node-set/
    (div/ (@/ (id "navigation"))
          (span/ (@/ (class "current"))
-                (a/cont/ ($$ "¥È¥Ã¥×")))
+                (a/cont/ ($$ "ãƒˆãƒƒãƒ—")))
          " > "
          (span/ (@/ (class "label"))
-                "¥Ş¥¤¥Ú¡¼¥¸")
+                "ãƒã‚¤ãƒšãƒ¼ã‚¸")
          " > "
          (span/ (@/ (class "label"))
                 name))
    (navigation-action/
     (pa$ equal? "calender")
-    (a/cont/ (@@/ (cont mypage "calender")) ($$ "¥«¥ì¥ó¥À¡¼"))
+    (a/cont/ (@@/ (cont mypage "calender")) ($$ "ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼"))
     (pa$ equal? "todo")
     (a/cont/ (@@/ (cont mypage "todo")) ($$ "TODO"))
     (pa$ equal? "recent")
-    (a/cont/ (@@/ (cont mypage "recent")) ($$ "ºÇ¶á¤Î¹¹¿·"))
+    (a/cont/ (@@/ (cont mypage "recent")) ($$ "æœ€è¿‘ã®æ›´æ–°"))
     (pa$ equal? "bookmark")
-    (a/cont/ (@@/ (cont mypage "bookmark")) ($$ "¥Ö¥Ã¥¯¥Ş¡¼¥¯"))
+    (a/cont/ (@@/ (cont mypage "bookmark")) ($$ "ãƒ–ãƒƒã‚¯ãƒãƒ¼ã‚¯"))
     (pa$ equal? "")
-    (a/cont/ (@@/ (cont change-passwd)) ($$ "¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹"))
+    (a/cont/ (@@/ (cont change-passwd)) ($$ "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´"))
     )))
 
 (define (navigation-action/ . node-pairs)
   (let* ((path-info (kahua-context-ref "x-kahua-path-info"))
          (name (and (not (null? path-info))
                     (last path-info))))
-    ;; ¥Ö¥é¥¦¥¶¤¬'display:inline-box'¤ò¥µ¥İ¡¼¥È¤¹¤ë¤Ş¤Ç¤Ï
-    ;; table¤ÇÂĞ±ş
+    ;; ãƒ–ãƒ©ã‚¦ã‚¶ãŒ'display:inline-box'ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã¾ã§ã¯
+    ;; tableã§å¯¾å¿œ
     (table/
      (@/ (id "navigation-action"))
      (tr/

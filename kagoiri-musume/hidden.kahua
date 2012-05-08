@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -21,15 +21,15 @@
    (lambda (u)
      (if (kahua-user-has-role? u '(admin))
 	 u #f))
-   ($$ "¥·¥¹¥Æ¥à´ÉÍı¼Ô¤Î¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
-   (h2/ "¼Â¸³¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯")
+   ($$ "ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
+   (h2/ "å®Ÿé¨“ãƒšãƒ¼ã‚¸ã¸ã®ãƒªãƒ³ã‚¯")
    (ul/ (@/ (class "menu"))
 	(li/ (a/cont/ (@/ (class "clickable"))
-		      (@@/ (cont admin-system "user" "csv")) "CSV¥¤¥ó¥İ¡¼¥È"))
+		      (@@/ (cont admin-system "user" "csv")) "CSVã‚¤ãƒ³ãƒãƒ¼ãƒˆ"))
 	(li/ (a/cont/ (@/ (class "clickable"))
-                      (@@/ (cont admin-system "group" "tree-edit")) "¥°¥ë¡¼¥×ÊÔ½¸"))
+                      (@@/ (cont admin-system "group" "tree-edit")) "ã‚°ãƒ«ãƒ¼ãƒ—ç·¨é›†"))
         (li/ (a/cont/ (@/ (class "clickable"))
-		      (@@/ (cont admin-system "user" "csv")) "CSV¥¤¥ó¥İ¡¼¥È"))
+		      (@@/ (cont admin-system "user" "csv")) "CSVã‚¤ãƒ³ãƒãƒ¼ãƒˆ"))
         )))
 
 (define-entry (hidden)
@@ -37,15 +37,15 @@
    (lambda (u)
      (if (kahua-user-has-role? u '(admin))
 	 u #f))
-   ($$ "¥·¥¹¥Æ¥à´ÉÍı¼Ô¤Î¥¢¥«¥¦¥ó¥È¤¬É¬Í×¤Ç¤¹")
-   (h2/ "¼Â¸³¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯")
+   ($$ "ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™")
+   (h2/ "å®Ÿé¨“ãƒšãƒ¼ã‚¸ã¸ã®ãƒªãƒ³ã‚¯")
    (ul/ (@/ (class "menu"))
         (entryes
-         ((admin-system "user" "csv") "CSV¥¤¥ó¥İ¡¼¥È")
-         ((admin-system "group") "¥°¥ë¡¼¥×ÊÔ½¸")
-         ((sendmail) "¥á¡¼¥ë")
-         ((log-analysis) "¥í¥°²òÀÏ")
-	 ((version-update) "¥¢¥Ã¥×¥Ç¡¼¥È")
+         ((admin-system "user" "csv") "CSVã‚¤ãƒ³ãƒãƒ¼ãƒˆ")
+         ((admin-system "group") "ã‚°ãƒ«ãƒ¼ãƒ—ç·¨é›†")
+         ((sendmail) "ãƒ¡ãƒ¼ãƒ«")
+         ((log-analysis) "ãƒ­ã‚°è§£æ")
+	 ((version-update) "ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ")
          ))))
 
 

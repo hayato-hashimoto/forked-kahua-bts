@@ -1,4 +1,4 @@
-;; -*- coding: euc-jp; mode: kahua -*-
+;; -*- coding: utf8; mode: kahua -*-
 ;;
 ;;  Copyright (c) 2005 Kahua.Org, All rights reserved.
 ;;  See COPYING for terms and conditions of using this software
@@ -9,7 +9,7 @@
 ;; DB Setting.
 ;;
 ;;(define *kagoiri-musume-title*
-;;  "äÆÆþÌ¼¡£ - Groupie System")
+;;  "ç± å…¥å¨˜ã€‚ - Groupie System")
 
 ;; Error Log Level
 ;;
