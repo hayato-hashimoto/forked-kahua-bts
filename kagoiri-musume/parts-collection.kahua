@@ -162,7 +162,7 @@
     (cond
       ((= 0 (length musumes)) ($$ "該当するチケットはありません。"))
 	    ((= 1 (length musumes)) ($$ "該当するチケットは 1 件 だけです。"))
-	    (else (format ($$  "該当するチケットは ~a 件 あります。 (length musumes)))))
+	    (else (format ($$  "該当するチケットは ~a 件 あります。" (length musumes)))))
     (div/ (@/ (id "status-num"))
 	  (map/ (lambda (s)
 		  (let1 statusid (code-of s)
