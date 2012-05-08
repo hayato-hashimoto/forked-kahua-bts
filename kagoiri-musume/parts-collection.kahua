@@ -355,7 +355,7 @@
 
 (define (create-unit-form/ . unit)
   (let1 unit (get-optional unit #f)
-    (devel:list/
+    (div/
      (h2/ (if unit
 	      (format ($$ "『~a』ユニット設定") (unit-name-of unit))
 	      ($$ "新ユニット結成")))
