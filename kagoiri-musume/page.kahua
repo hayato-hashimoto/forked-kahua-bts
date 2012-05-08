@@ -25,9 +25,11 @@
 (define (page-base . body)
   (error-log-write 'Logging 5 "page-base logging.")
   (html/
-   (head/ (title/ *kagoiri-musume-title*)
+   (head/ 
+    (base/ (@/ (href (kahua-base-uri))))
 	  (meta/ (@/ (http-equiv "Content-type")
 		     (content *content-type*)))
+    (title/ *kagoiri-musume-title*)
 	  (link/ (@/ (rel "stylesheet") (type "text/css")
 		     (href (kahua-static-document-url
 			    "kagoiri-musume/kagoiri-musume.css"))))
